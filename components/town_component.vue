@@ -25,5 +25,6 @@ export default {
 <style>
 .place_group {
   display: flex;
+  flex-wrap: wrap;
 }
 </style>

@@ -38,6 +38,10 @@ export default {
 .place {
   width: 32px;
   height: 32px;
+  border: 1px solid black;
+  border-radius: 4px;
+  margin: 2px 2px;
+  padding: 2px 2px;
 }
 
 .place img {
