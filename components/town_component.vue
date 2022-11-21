@@ -1,10 +1,13 @@
 <template>
-  <div class="place_group">
-    <ConstructionPlace
-      v-for="(place, index) in info"
-      :key="index"
-      :info="place"
-    />
+  <div class="town" :style="position">
+    <div>{{ info.name }}</div>
+    <div class="place_group">
+      <ConstructionPlace
+        v-for="(place, index) in info.places"
+        :key="index"
+        :info="place"
+      />
+    </div>
   </div>
 </template>
 
@@ -19,10 +22,19 @@ export default {
       type: Object,
     },
   },
+  computed: {
+    position() {
+      return `top:${this.info.position.y}px;left:${this.info.position.x}px;`;
+    },
+  },
 };
 </script>
 
 <style>
+.town {
+  position: absolute;
+}
+
 .place_group {
   display: flex;
   flex-wrap: wrap;

@@ -1,6 +1,8 @@
 <template>
   <div>
-    <TownComponent v-for="(v, k) in base_map.towns" :key="k" :info="v" />
+    <div class="map">
+      <TownComponent v-for="(v, k) in base_map.towns" :key="k" :info="v" />
+    </div>
   </div>
 </template>
 
@@ -20,4 +22,7 @@ export default {
 </script>
 
 <style>
+.map {
+  position: relative;
+}
 </style>
