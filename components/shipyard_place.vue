@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="width: 100%; height: 100%">
     <img src="~/assets/images/shipyard.png" :alt="info.type" />
   </div>
 </template>

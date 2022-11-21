@@ -1,6 +1,5 @@
 <template>
   <div>
-    hey
     <img src="~/assets/images/ironworks.png" :alt="info.type" />
   </div>
 </template>

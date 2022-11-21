@@ -1,4 +1,4 @@
-import mongo from "~/assets/js/mongo";
+/*import mongo from "~/assets/js/mongo";
 
 
 export default defineEventHandler(async function (event) {
@@ -61,4 +61,4 @@ export default defineEventHandler(async function (event) {
         api: "works"
     }
 
-})
+})*/

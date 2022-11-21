@@ -1,7 +1,11 @@
 <template>
   <div>
-    <img src="~/assets/images/cotton_mill.png" :alt="info.type" width="64" />
-    <img src="~/assets/images/port.png" :alt="info.type" width="64" />
+    <div class="half">
+      <img src="~/assets/images/cotton_mill.png" :alt="info.type" width="64" />
+    </div>
+    <div class="half">
+      <img src="~/assets/images/port.png" :alt="info.type" width="64" />
+    </div>
   </div>
 </template>
 
