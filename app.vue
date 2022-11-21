@@ -2,6 +2,12 @@
   <div>
     <div class="map">
       <TownComponent v-for="(v, k) in base_map.towns" :key="k" :info="v" />
+      <CanalPlace
+        v-for="(index, canal) in base_map.canals"
+        :key="index"
+        :town_a="base_map.towns[canal.0]"
+        :town_b="base_map.towns[canal.1]"
+      />
     </div>
   </div>
 </template>
