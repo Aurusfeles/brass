@@ -140,7 +140,7 @@ export default {
             name: "Stockport",
             places: [{ type: "cotton_mill" }, { type: "cotton_mill" }],
             position: {
-                x: 450,
+                x: 500,
                 y: 600
             }
         },
@@ -222,9 +222,9 @@ export default {
         ["manchester", "stockport"],
         ["stockport", "macclesfield"],
         ["macclesfield", "the_midlands"],
-        ["the_midlands", "northwitch"],
-        ["ellesmere_port", "northwitch"],
-        ["liverpool", "ellesmere_port"]
+        ["the_midlands", "northwich"],
+        ["ellesmere_port", "northwich"],
+        ["liverpool", "ellesmere_port"],
         ["warrington_runcorn", "ellesmere_port"]
 
 
