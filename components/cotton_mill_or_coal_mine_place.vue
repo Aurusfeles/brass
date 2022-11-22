@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <div class="multiple">
     <div class="half">
-      <img src="~/assets/images/cotton_mill.png" :alt="info.type" width="64" />
+      <img src="~/assets/images/cotton_mill.png" :alt="info.type" />
     </div>
-    <div class="half">
-      <img src="~/assets/images/coal_mine.png" :alt="info.type" width="64" />
+    <div class="half bottom_right">
+      <img src="~/assets/images/coal_mine.png" :alt="info.type" />
     </div>
   </div>
 </template>
@@ -20,8 +20,17 @@ export default {
 </script>
 
 <style>
+.multiple {
+  position: relative;
+}
+
 .half {
-  width: 16px;
-  height: 16px;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+}
+.bottom_right {
+  right: 0px;
+  bottom: 0px;
 }
 </style>

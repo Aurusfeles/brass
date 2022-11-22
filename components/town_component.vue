@@ -33,6 +33,7 @@ export default {
 <style>
 .town {
   position: absolute;
+  width: 90px;
 }
 
 .place_group {

@@ -19,9 +19,9 @@ export default {
       console.log("position", this.town_a.position, this.town_b.position);
       return (
         "left:" +
-        (this.town_a.position.x + this.town_b.position.x) / 2 +
+        (16 + (this.town_a.position.x + this.town_b.position.x) / 2) +
         "px;top:" +
-        (this.town_a.position.y + this.town_b.position.y) / 2 +
+        (16 + (this.town_a.position.y + this.town_b.position.y) / 2) +
         "px;"
       );
     },
@@ -47,13 +47,12 @@ export default {
                 this.vector_2.y * this.vector_2.y
             ))
       );
-      let angle;
-      if (rad_angle > Math.PI / 2) {
-        angle = (rad_angle * 180) / Math.PI + 180;
-      } else {
-        angle = (rad_angle * 180) / Math.PI;
+      let angle = -(rad_angle * 360) / (Math.PI * 2);
+      if (this.town_a.position.y > this.town_b.position.y) {
+        angle = -angle;
       }
-      console.log("angle", angle);
+
+      console.log(this.town_a.name, this.town_b.name, angle);
       return "transform: rotate(" + angle + "deg);";
     },
   },
@@ -63,5 +62,7 @@ export default {
 <style>
 .canal {
   position: absolute;
+  border: 1px solid black;
+  border-radius: 4px;
 }
 </style>

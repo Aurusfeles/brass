@@ -4,7 +4,7 @@ export default {
             name: "Barrow-in-Furness",
             places: [{ type: "shipyard" }, { type: "ironworks" }],
             position: {
-                x: 0,
+                x: 100,
                 y: 0
             }
         },
@@ -12,7 +12,7 @@ export default {
             name: "Lancaster",
             places: [{ type: "port" }, { type: "cotton_mill_or_port" }],
             position: {
-                x: 150,
+                x: 300,
                 y: 0
             }
         },
@@ -109,7 +109,7 @@ export default {
             places: [{ type: "shipyard" }],
             position: {
                 x: 0,
-                y: 450
+                y: 600
             }
         },
         warrington_runcorn: {
@@ -132,7 +132,7 @@ export default {
             name: "Ellesmere Port",
             places: [{ type: "port" }],
             position: {
-                x: 75,
+                x: 150,
                 y: 600
             }
         },
@@ -148,7 +148,7 @@ export default {
             name: "Macclesfield",
             places: [{ type: "cotton_mill" }, { type: "cotton_mill" }],
             position: {
-                x: 450,
+                x: 500,
                 y: 750
             }
         },
@@ -164,8 +164,8 @@ export default {
             name: "The Midlands",
             type: "external_port",
             position: {
-                x: 450,
-                y: 1000
+                x: 300,
+                y: 800
             }
         },
         blackpool: {
@@ -173,14 +173,14 @@ export default {
             type: "external",
             position: {
                 x: 0,
-                y: 150
+                y: 200
             }
         },
         scotland: {
             name: "Scotland",
             type: "external_port",
             position: {
-                x: 300,
+                x: 450,
                 y: 0
             }
         },
@@ -196,7 +196,7 @@ export default {
             name: "Northwich",
             type: "external",
             position: {
-                x: 300,
+                x: 150,
                 y: 750
             }
         },

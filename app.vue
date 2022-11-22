@@ -10,19 +10,42 @@
       >
       </CanalPlace>
     </div>
+    <MyHand :content="my_cards" />
   </div>
 </template>
 
 <script>
 import base_map from "~/assets/js/map";
-import town_component from "~/components/town_component.vue";
 export default {
-  components: {
-    town_component,
-  },
   data() {
     return {
       base_map,
+      my_cards: [
+        {
+          type: "location",
+          location: "bury",
+        },
+        {
+          type: "location",
+          location: "manchester",
+        },
+        {
+          type: "location",
+          location: "colne",
+        },
+        {
+          type: "building",
+          building: "coal_mine",
+        },
+        {
+          type: "building",
+          building: "port",
+        },
+        {
+          type: "building",
+          building: "cotton_mill",
+        },
+      ],
     };
   },
 };
