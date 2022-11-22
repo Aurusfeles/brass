@@ -1,14 +1,16 @@
 <template>
   <div>
     <div class="map">
-      <TownComponent v-for="(v, k) in base_map.towns" :key="k" :info="v" />
-      <CanalPlace
-        v-for="(canal, index) in base_map.canals"
-        :key="index"
-        :town_a="base_map.towns[canal[0]]"
-        :town_b="base_map.towns[canal[1]]"
-      >
-      </CanalPlace>
+      <div class="map_content">
+        <TownComponent v-for="(v, k) in base_map.towns" :key="k" :info="v" />
+        <CanalPlace
+          v-for="(canal, index) in base_map.canals"
+          :key="index"
+          :town_a="base_map.towns[canal[0]]"
+          :town_b="base_map.towns[canal[1]]"
+        >
+        </CanalPlace>
+      </div>
     </div>
     <MyHand :content="my_cards" />
   </div>
@@ -16,7 +18,11 @@
 
 <script>
 import base_map from "~/assets/js/map";
+import my_hand from "~/components/my_hand.vue";
 export default {
+  components: {
+    my_hand,
+  },
   data() {
     return {
       base_map,
@@ -53,6 +59,11 @@ export default {
 
 <style>
 .map {
+  height: 900px;
+  width: 700px;
+}
+
+.map_content {
   position: relative;
 }
 </style>
