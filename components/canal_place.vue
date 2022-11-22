@@ -32,10 +32,10 @@ export default {
       };
     },
     vector_2() {
-      return { x: 100, y: 0 };
+      return { x: 1, y: 0 };
     },
     css_angle() {
-      let angle = Math.acos(
+      let rad_angle = Math.acos(
         (this.vector_1.x * this.vector_2.x +
           this.vector_1.y * this.vector_2.y) /
           (Math.sqrt(
@@ -47,6 +47,12 @@ export default {
                 this.vector_2.y * this.vector_2.y
             ))
       );
+      let angle;
+      if (rad_angle > Math.PI / 2) {
+        angle = (rad_angle * 180) / Math.PI + 180;
+      } else {
+        angle = (rad_angle * 180) / Math.PI;
+      }
       console.log("angle", angle);
       return "transform: rotate(" + angle + "deg);";
     },
