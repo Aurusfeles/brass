@@ -162,11 +162,24 @@ let buildings = {
         quantity: 3
     },
     ],
-    shipyards: [
-    ]
 }
 
-export function get_building_tile(building, player) {
+export function make_new_building_set() {
+    let new_building_set = {};
+    for (const building_type in buildings) {
+        new_building_set[building_type] = [];
+        for (const building_specs of buildings[building_type]) {
+            let i = 0;
+            while (i < building_specs.quantity) {
+                new_building_set[building_type].push({ ...building_specs })
+                i++;
+            }
+        }
+    }
+    return new_building_set;
+}
+
+export function get_building_tile(building_type, number) {
 
 }
 

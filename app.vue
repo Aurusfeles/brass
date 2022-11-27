@@ -1,5 +1,8 @@
 <template>
   <div>
+    {{ buildings }}
+    <CoalMarket :market_spot="3" />
+    <IronMarket :market_spot="2" />
     <div class="map">
       <div class="map_content">
         <TownComponent v-for="(v, k) in base_map.towns" :key="k" :info="v" />
@@ -19,6 +22,8 @@
 <script>
 import base_map from "~/assets/js/map";
 import my_hand from "~/components/my_hand.vue";
+import * as possibilities from "~/assets/js/possibilities";
+
 export default {
   components: {
     my_hand,
@@ -26,6 +31,7 @@ export default {
   data() {
     return {
       base_map,
+      buildings: possibilities.make_new_building_set(),
       my_cards: [
         {
           type: "location",
