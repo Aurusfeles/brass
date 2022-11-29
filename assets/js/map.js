@@ -202,34 +202,33 @@ export default {
         },
     },
     canals: [
-        ["lancaster", "preston"],
-        ["preston", "fleetwood"],
-        ["preston", "wigan"],
-        ["liverpool", "wigan"],
-        ["warrington_runcorn", "wigan"],
-        ["blackburn", "wigan"],
-        ["blackburn", "burnley"],
-        ["burnley", "colne"],
-        ["colne", "yorkshire"],
-        ["rochdale", "yorkshire"],
-        ["rochdale", "yorkshire"],
-        ["rochdale", "oldham"],
-        ["oldham", "manchester"],
-        ["manchester", "bury"],
-        ["manchester", "bolton"],
-        ["bolton", "bury"],
-        ["manchester", "warrington_runcorn"],
-        ["manchester", "stockport"],
-        ["stockport", "macclesfield"],
-        ["macclesfield", "the_midlands"],
-        ["the_midlands", "northwich"],
-        ["ellesmere_port", "northwich"],
-        ["liverpool", "ellesmere_port"],
-        ["warrington_runcorn", "ellesmere_port"]
+        { link: ["lancaster", "preston"] },
+        { link: ["preston", "fleetwood"] },
+        { link: ["preston", "wigan"] },
+        { link: ["liverpool", "wigan"] },
+        { link: ["warrington_runcorn", "wigan"] },
+        { link: ["blackburn", "wigan"] },
+        { link: ["blackburn", "burnley"] },
+        { link: ["burnley", "colne"] },
+        { link: ["colne", "yorkshire"] },
+        { link: ["rochdale", "yorkshire"] },
+        { link: ["rochdale", "yorkshire"] },
+        { link: ["rochdale", "oldham"] },
+        { link: ["oldham", "manchester"] },
+        { link: ["manchester", "bury"] },
+        { link: ["manchester", "bolton"] },
+        { link: ["bolton", "bury"] },
+        { link: ["manchester", "warrington_runcorn"] },
+        { link: ["manchester", "stockport"] },
+        { link: ["stockport", "macclesfield"] },
+        { link: ["macclesfield", "the_midlands"] },
+        { link: ["the_midlands", "northwich"] },
+        { link: ["ellesmere_port", "northwich"] },
+        { link: ["liverpool", "ellesmere_port"] },
+        { link: ["warrington_runcorn", "ellesmere_port"] }
 
 
     ]
-
 
 
 }

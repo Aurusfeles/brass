@@ -1,5 +1,5 @@
 <template>
-  <div class="canal" :style="css_position + css_angle">
+  <div class="canal" :style="css_position + css_angle + css_color">
     <img src="~/assets/images/canal.png" alt="canal" />
   </div>
 </template>
@@ -15,6 +15,9 @@ export default {
     },
   },
   computed: {
+    css_color() {
+      //return "background-color:" + thi;
+    },
     css_position() {
       console.log("position", this.town_a.position, this.town_b.position);
       return (

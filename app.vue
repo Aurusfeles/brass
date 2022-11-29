@@ -1,16 +1,15 @@
 <template>
   <div>
-    {{ buildings }}
     <CoalMarket :market_spot="3" />
     <IronMarket :market_spot="2" />
     <div class="map">
       <div class="map_content">
-        <TownComponent v-for="(v, k) in base_map.towns" :key="k" :info="v" />
+        <TownComponent v-for="(v, k) in game.map.towns" :key="k" :info="v" />
         <CanalPlace
-          v-for="(canal, index) in base_map.canals"
+          v-for="(canal, index) in game.map.canals"
           :key="index"
-          :town_a="base_map.towns[canal[0]]"
-          :town_b="base_map.towns[canal[1]]"
+          :town_a="game.map.towns[canal.link[0]]"
+          :town_b="game.map.towns[canal.link[1]]"
         >
         </CanalPlace>
       </div>
@@ -23,6 +22,7 @@
 import base_map from "~/assets/js/map";
 import my_hand from "~/components/my_hand.vue";
 import * as possibilities from "~/assets/js/possibilities";
+import game from "~/assets/js/example_game";
 
 export default {
   components: {
@@ -30,8 +30,7 @@ export default {
   },
   data() {
     return {
-      base_map,
-      buildings: possibilities.make_new_building_set(),
+      game,
       my_cards: [
         {
           type: "location",
