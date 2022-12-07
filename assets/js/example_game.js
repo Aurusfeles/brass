@@ -62,7 +62,10 @@ export default {
                     type: "cotton_mill_or_coal_mine", marker: {
                         type: "cotton_mill",
                         player: 0,
-                        level: 1
+                        level: 1,
+                        cost: 12,
+                        income: 5,
+                        vp: 5,
                     }
                 }, { type: "cotton_mill_or_coal_mine" }],
                 position: {
@@ -101,7 +104,12 @@ export default {
                         type: "coal_mine",
                         player: 1,
                         level: 1,
-                        coal_cubes: 2
+                        coal_cubes: 2,
+                        cost: 5,
+                        income: 4,
+                        vp: 1,
+                        production: 2,
+
                     }
                 }, { type: "coal_mine" }],
                 position: {
@@ -140,7 +148,11 @@ export default {
                         type: "coal_mine",
                         player: 1,
                         level: 1,
-                        flipped: true
+                        flipped: true,
+                        cost: 5,
+                        income: 4,
+                        vp: 1,
+                        production: 2,
                     }
                 }, { type: "port" }],
                 position: {
