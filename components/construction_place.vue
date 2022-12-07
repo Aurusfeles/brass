@@ -1,12 +1,17 @@
 <template>
-  <div class="place">
+  <div class="place" :style="style">
     <component
-      :is="info.type + '_place'"
+      :is="type"
       :info="info"
       style="width: 100%; height: 100%"
     ></component>
   </div>
 </template>
+
+<script setup>
+const players = usePlayers();
+</script>
+
 
 <script>
 import port_place from "~/components/port_place.vue";
@@ -29,6 +34,26 @@ export default {
   props: {
     info: {
       type: Object,
+    },
+  },
+  computed: {
+    type() {
+      if (this.info.marker !== undefined) {
+        return this.info.marker.type + "_place";
+      } else {
+        return this.info.type + "_place";
+      }
+    },
+    style() {
+      return this.css_color;
+    },
+    css_color() {
+      if (this.info.marker === undefined) {
+        return "background-color:lightgray";
+      }
+      return (
+        "background-color:" + this.players[this.info.marker.player].color + ";"
+      );
     },
   },
 };

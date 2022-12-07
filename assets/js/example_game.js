@@ -98,6 +98,7 @@ export default {
                 name: "Wigan",
                 places: [{
                     type: "coal_mine", marker: {
+                        type: "coal_mine",
                         player: 1,
                         level: 1,
                         coal_cubes: 2
@@ -136,6 +137,7 @@ export default {
                 name: "Warrington & Runcorn",
                 places: [{
                     type: "cotton_mill_or_coal_mine", marker: {
+                        type: "coal_mine",
                         player: 1,
                         level: 1,
                         flipped: true
