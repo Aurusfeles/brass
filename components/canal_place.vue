@@ -4,21 +4,35 @@
   </div>
 </template>
 
+<script setup>
+const towns = useTowns();
+const players = usePlayers();
+</script>
+
 <script>
 export default {
   props: {
-    town_a: {
-      type: Object,
-    },
-    town_b: {
+    info: {
       type: Object,
     },
   },
   computed: {
     css_color() {
-      //return "background-color:" + thi;
+      if (this.info.player === undefined) {
+        return "";
+      }
+      return "background-color:" + this.players[this.info.player].color + ";";
+    },
+    town_a() {
+      return this.towns[this.info.link[0]];
+    },
+    town_b() {
+      return this.towns[this.info.link[1]];
     },
     css_position() {
+      if (this.town_a === undefined || this.town_b === undefined) {
+        return "";
+      }
       console.log("position", this.town_a.position, this.town_b.position);
       return (
         "left:" +
@@ -29,6 +43,9 @@ export default {
       );
     },
     vector_1() {
+      if (this.town_a === undefined || this.town_b === undefined) {
+        return { x: 0, y: 0 };
+      }
       return {
         x: this.town_a.position.x - this.town_b.position.x,
         y: this.town_a.position.y - this.town_b.position.y,
@@ -38,6 +55,10 @@ export default {
       return { x: 1, y: 0 };
     },
     css_angle() {
+      if (this.town_a === undefined || this.town_b === undefined) {
+        return "";
+      }
+
       let rad_angle = Math.acos(
         (this.vector_1.x * this.vector_2.x +
           this.vector_1.y * this.vector_2.y) /

@@ -4,19 +4,24 @@
     <IronMarket :market_spot="2" />
     <div class="map">
       <div class="map_content">
-        <TownComponent v-for="(v, k) in game.map.towns" :key="k" :info="v" />
+        <TownComponent v-for="(v, k) in towns" :key="k" :info="v" />
         <CanalPlace
-          v-for="(canal, index) in game.map.canals"
+          v-for="(canal, index) in canals"
           :key="index"
-          :town_a="game.map.towns[canal.link[0]]"
-          :town_b="game.map.towns[canal.link[1]]"
-        >
-        </CanalPlace>
+          :info="canal"
+        />
       </div>
     </div>
     <MyHand :content="my_cards" />
   </div>
 </template>
+
+<script setup>
+const towns = useTowns();
+const canals = useCanals();
+</script>
+
+
 
 <script>
 import base_map from "~/assets/js/map";
@@ -30,6 +35,9 @@ export default {
   },
   data() {
     return {
+      towns: {
+        truc: "",
+      },
       game,
       my_cards: [
         {
