@@ -18,6 +18,11 @@
   </div>
 </template>
 
+<script setup>
+const towns = useTowns();
+const players = usePlayers();
+</script>
+
 <script>
 export default {
   data() {
@@ -30,18 +35,21 @@ export default {
       type: Array,
     },
   },
-  method: {
+  methods: {
     card_click(card) {
       this.possibilities.push(this.build_possibilities(card));
     },
     build_possibilities(card) {
+      console.log(card);
       if (card.type == "location") {
-        return build_possibilities_for_location(card.location);
+        return this.build_possibilities_for_location(card.location);
       } else {
-        return build_possibilities_for_building(card.building);
+        return this.build_possibilities_for_building(card.building);
       }
     },
-    build_possibilities_for_location(location) {},
+    build_possibilities_for_location(location) {
+      let town = this.towns[location];
+    },
     build_possibilities_for_building(building) {},
   },
 };

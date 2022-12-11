@@ -8,6 +8,9 @@
     <div class="victory_points" :style="verso" :class="flipped">
       {{ victory_points }}
     </div>
+    <div class="cubes">
+      <div v-for="(k, i) in cubes" :key="i" :class="'cube ' + cube_type"></div>
+    </div>
     <div class="level">{{ level }}</div>
     <div class="production" :style="recto">{{ production }}</div>
     <div class="cost" :style="recto">{{ cost }}</div>
@@ -62,6 +65,24 @@ export default {
     recto() {
       if (this.info.marker !== undefined) {
         return this.info.marker.flipped ? "display:none;" : "";
+      }
+      return "";
+    },
+    cubes() {
+      if (this.info.marker !== undefined) {
+        return this.info.marker.coal_cubes || this.info.marker.iron_cubes || [];
+      }
+      return [];
+    },
+    cube_type() {
+      if (this.info.marker !== undefined) {
+        if (this.info.marker.coal_cubes !== undefined) {
+          return "coal";
+        } else if (this.info.marker.iron_cubes !== undefined) {
+          return "coal";
+        } else {
+          return "";
+        }
       }
       return "";
     },
@@ -141,11 +162,20 @@ export default {
   background-color: hsl(30deg 80% 80%);
 }
 
-.verso {
-  display: none;
-}
-
 .flipped {
   display: inherit;
+}
+
+.cubes {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+  gap: 2px;
+}
+.cube {
+  width: 10px;
+  height: 10px;
 }
 </style>
