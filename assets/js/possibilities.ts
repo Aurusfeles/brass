@@ -1,4 +1,106 @@
-let buildings = {
+enum BuildingType {
+    CottonMill,
+    CoalMine,
+    Ironworks,
+    Port,
+    Shipyard,
+}
+
+enum CubeType {
+    Iron,
+    Coal
+}
+
+enum CardType {
+    Location,
+    Building
+}
+
+interface Card {
+    type: CardType,
+    location?: string,
+    building?: BuildingType
+}
+
+interface BuildingMarkerStock {
+    ports: BuildingMarker[],
+    cotton_mills: BuildingMarker[],
+    ironworks: BuildingMarker[],
+    shipyards: BuildingMarker[],
+    coal_mines: BuildingMarker[]
+}
+
+interface Player {
+    name: string,
+    color: string,
+    money: number,
+    points: number,
+    income_spot: number,
+    hand: Card[],
+    building_marker_stock: BuildingMarkerStock,
+    canal_marker_stock: number,
+    railroad_marker_stock: number,
+}
+
+enum Era {
+    Canals,
+    Rairoads
+}
+
+interface GameMap {
+    towns: Town[],
+    canals: Canal[],
+}
+
+interface Game {
+    players: Player[],
+    map: GameMap,
+    coal_demand_spot: number,
+    iron_demand_spot: number,
+    cotton_market_spot: number,
+    player_order: number[],
+    era: Era,
+    deck: number,
+    played_cards: Card[]
+
+}
+
+interface Canal {
+    link: Town[],
+    player?: number,
+    position: Position
+}
+
+interface Position {
+    x: number,
+    y: number
+}
+
+interface Town {
+    name: string,
+    places: ConstructionPlace[],
+    position: Position
+}
+
+interface BuildingMarker {
+    type: BuildingType,
+    player: Number,
+    level: number,
+    cube_production?: number,
+    cube_type?: CubeType,
+    cube_quantity?: number,
+    cost: number,
+    income: number,
+    vp: number,
+}
+
+interface ConstructionPlace {
+    type: BuildingType[],
+    marker?: BuildingMarker
+}
+
+
+let base_building_marker_stock = {
     shipyards: [
         {
             level: 0,
@@ -183,11 +285,37 @@ export function get_building_tile(building_type, number) {
 
 }
 
+function construction_place_build_possibility(location, construction_place_index, player, game) {
+
+}
+
 export function build_possibilities_for_location(location, player, game) {
     let town = game.map.towns[location];
     if (game.era == "canals" && town.places.find((place) => place.building !== undefined && place.building.player == player)) {
         return "You already have a building there."
     }
+
+    let free_buildings = [];
+    for (const place of town.places.filter((place) => place.marker === undefined)) {
+        switch (place.type) {
+            case "cotton_mill_or_coal_mine":
+                free_buildings.push("cotton_mill");
+                free_buildings.push("coal_mine");
+                break;
+            case "cotton_mill_or_port":
+                free_buildings.push("cotton_mill");
+                free_buildings.push("port");
+                break;
+            case "coal_mine":
+                free_buildings.push("coal_mine");
+                break;
+            case "ironworks":
+                free_buildings.push("ironworks");
+                break;
+
+        }
+    }
+
 }
 
 export function build_possibilities_for_building(building, player, game) {
