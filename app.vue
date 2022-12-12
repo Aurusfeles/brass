@@ -26,7 +26,7 @@ const canals = useCanals();
 <script>
 import base_map from "~/assets/js/map";
 import my_hand from "~/components/my_hand.vue";
-import * as possibilities from "~/assets/js/possibilities";
+import * as possibilities from "~~/assets/js/possibilities";
 import game from "~/assets/js/example_game";
 
 export default {

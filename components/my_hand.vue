@@ -49,6 +49,7 @@ export default {
     },
     build_possibilities_for_location(location) {
       let town = this.towns[location];
+      for
     },
     build_possibilities_for_building(building) {},
   },
