@@ -17,15 +17,32 @@ enum CardType {
 }
 
 enum TownName {
-    Manchester,
-    Lancaster,
-    Fleetwood,
-    Wigan,
-    Rochdale,
+    BarrowInFurness,
+    Birkenhead,
+    Blackburn,
+    Blackpool,
+    Bolton,
     Burnley,
-    Colne,
     Bury,
-    Oldham
+    Colne,
+    EllesmerePort,
+    Fleetwood,
+    Lancaster,
+    Liverpool,
+    Macclesfield,
+    Manchester,
+    Northwich,
+    Oldham,
+    Preston,
+    Rochdale,
+    Scotland,
+    Southport,
+    Stockport,
+    TheMidlands,
+    WarringtonAndRuncorn,
+    Wigan,
+    Yorkshire,
+
 }
 
 interface Card {
@@ -147,12 +164,9 @@ class BuildingMarkerStock {
 class Town {
     name: string;
     places: ConstructionPlace[];
-    position: Position;
-
-    constructor(name: string, places: ConstructionPlace[], position: Position) {
+    constructor(name: string, places: ConstructionPlace[]) {
         this.name = name;
         this.places = places;
-        this.position = position;
     }
 }
 
@@ -192,20 +206,58 @@ class GameMap {
 
     constructor() {
         this.towns = {
-            [TownName.Burnley]: new Town("Burnley", [], { x: 0, y: 0 }),
-            [TownName.Bury]: new Town("Bury", [], { x: 0, y: 0 }),
-            [TownName.Oldham]: new Town("Oldham", [], { x: 0, y: 0 }),
-            [TownName.Rochdale]: new Town("Rochdale", [], { x: 0, y: 0 }),
-            [TownName.Colne]: new Town("Colne", [], { x: 0, y: 0 }),
-            [TownName.Fleetwood]: new Town("Fleetwood", [], { x: 0, y: 0 }),
-            [TownName.Wigan]: new Town("Wigan", [], { x: 0, y: 0 }),
-            [TownName.Manchester]: new Town("Manchester", [], { x: 0, y: 0 }),
-            [TownName.Lancaster]: new Town("Lancaster", [], { x: 0, y: 0 }),
-
+            [TownName.BarrowInFurness]: new Town("Barrow-in-Furness", [new ConstructionPlace([BuildingType.Shipyard]), new ConstructionPlace([BuildingType.Ironworks])]),
+            [TownName.Birkenhead]: new Town("Birkenhead", [new ConstructionPlace([BuildingType.Shipyard])]),
+            [TownName.Blackburn]: new Town("Blackburn", [new ConstructionPlace([BuildingType.CottonMill, BuildingType.CoalMine]), new ConstructionPlace([BuildingType.CottonMill, BuildingType.CoalMine]), new ConstructionPlace([BuildingType.Ironworks])]),
+            [TownName.Blackpool]: new Town("Blackpool", []),
+            [TownName.Bolton]: new Town("Bolton", [new ConstructionPlace([BuildingType.CottonMill, BuildingType.CoalMine]), new ConstructionPlace([BuildingType.CottonMill, BuildingType.CoalMine]), new ConstructionPlace([BuildingType.Ironworks])]),
+            [TownName.Burnley]: new Town("Burnley", [new ConstructionPlace([BuildingType.CottonMill, BuildingType.CoalMine]), new ConstructionPlace([BuildingType.CottonMill, BuildingType.CoalMine])]),
+            [TownName.Bury]: new Town("Bury", [new ConstructionPlace([BuildingType.CottonMill, BuildingType.CoalMine]), new ConstructionPlace([BuildingType.CottonMill, BuildingType.CoalMine])]),
+            [TownName.Colne]: new Town("Colne", [new ConstructionPlace([BuildingType.CottonMill]), new ConstructionPlace([BuildingType.CottonMill])]),
+            [TownName.EllesmerePort]: new Town("Ellesmere Port", [new ConstructionPlace([BuildingType.Port])]),
+            [TownName.Fleetwood]: new Town("Fleetwood", [new ConstructionPlace([BuildingType.Port])]),
+            [TownName.Lancaster]: new Town("Lancaster", [new ConstructionPlace([BuildingType.Port]), new ConstructionPlace([BuildingType.CottonMill, BuildingType.Port])]),
+            [TownName.Liverpool]: new Town("Liverpool", [new ConstructionPlace([BuildingType.Port]), new ConstructionPlace([BuildingType.Port]), new ConstructionPlace([BuildingType.Shipyard]), new ConstructionPlace([BuildingType.Port])]),
+            [TownName.Macclesfield]: new Town("Macclesfield", [new ConstructionPlace([BuildingType.CottonMill]), new ConstructionPlace([BuildingType.CottonMill])]),
+            [TownName.Manchester]: new Town("Manchester", [new ConstructionPlace([BuildingType.CottonMill, BuildingType.CoalMine]), new ConstructionPlace([BuildingType.CottonMill, BuildingType.CoalMine]), new ConstructionPlace([BuildingType.CottonMill, BuildingType.CoalMine]), new ConstructionPlace([BuildingType.Ironworks])]),
+            [TownName.Northwich]: new Town("Northwich", []),
+            [TownName.Oldham]: new Town("Oldham", [new ConstructionPlace([BuildingType.CottonMill, BuildingType.CoalMine]), new ConstructionPlace([BuildingType.CottonMill, BuildingType.CoalMine])]),
+            [TownName.Preston]: new Town("Preston", [new ConstructionPlace([BuildingType.Port]), new ConstructionPlace([BuildingType.CottonMill, BuildingType.Port]), new ConstructionPlace([BuildingType.Ironworks])]),
+            [TownName.Rochdale]: new Town("Rochdale", [new ConstructionPlace([BuildingType.CottonMill, BuildingType.CoalMine]), new ConstructionPlace([BuildingType.CottonMill, BuildingType.CoalMine]), new ConstructionPlace([BuildingType.Ironworks])]),
+            [TownName.Scotland]: new Town("Scotland", []),
+            [TownName.Southport]: new Town("Southport", []),
+            [TownName.Stockport]: new Town("Stockport", [new ConstructionPlace([BuildingType.CottonMill]), new ConstructionPlace([BuildingType.CottonMill])]),
+            [TownName.TheMidlands]: new Town("The Midlands", []),
+            [TownName.WarringtonAndRuncorn]: new Town("Warrington & Runcorn", [new ConstructionPlace([BuildingType.CottonMill, BuildingType.CoalMine]), new ConstructionPlace([BuildingType.Port])]),
+            [TownName.Wigan]: new Town("Wigan", [new ConstructionPlace([BuildingType.CoalMine]), new ConstructionPlace([BuildingType.CoalMine])]),
+            [TownName.Yorkshire]: new Town("Yorkshire", []),
         };
-
-        this.canals = [];
-
+        this.canals = [
+            { link: [TownName.Lancaster, TownName.Preston] },
+            { link: [TownName.Preston, TownName.Fleetwood] },
+            { link: [TownName.Preston, TownName.Wigan] },
+            { link: [TownName.Liverpool, TownName.Wigan] },
+            { link: [TownName.WarringtonAndRuncorn, TownName.Wigan] },
+            { link: [TownName.Blackburn, TownName.Wigan] },
+            { link: [TownName.Blackburn, TownName.Burnley] },
+            { link: [TownName.Burnley, TownName.Colne] },
+            { link: [TownName.Colne, TownName.Yorkshire] },
+            { link: [TownName.Rochdale, TownName.Yorkshire] },
+            { link: [TownName.Rochdale, TownName.Yorkshire] },
+            { link: [TownName.Rochdale, TownName.Oldham] },
+            { link: [TownName.Oldham, TownName.Manchester] },
+            { link: [TownName.Manchester, TownName.Bury] },
+            { link: [TownName.Manchester, TownName.Bolton] },
+            { link: [TownName.Bolton, TownName.Bury] },
+            { link: [TownName.Manchester, TownName.WarringtonAndRuncorn] },
+            { link: [TownName.Manchester, TownName.Stockport] },
+            { link: [TownName.Stockport, TownName.Macclesfield] },
+            { link: [TownName.Macclesfield, TownName.TheMidlands] },
+            { link: [TownName.TheMidlands, TownName.Northwich] },
+            { link: [TownName.EllesmerePort, TownName.Northwich] },
+            { link: [TownName.Liverpool, TownName.EllesmerePort] },
+            { link: [TownName.WarringtonAndRuncorn, TownName.EllesmerePort] }
+        ]
     }
 }
 
@@ -240,21 +292,21 @@ class Game {
 }
 
 interface Canal {
-    link: Town[],
+    link: TownName[],
     player?: number,
-    position: Position
 }
 
-interface Position {
-    x: number,
-    y: number
-}
+class ConstructionPlace {
+    accepted_building_types: BuildingType[];
+    building_marker?: BuildingMarker;
 
+    constructor(accepted_building_types: BuildingType[]) {
+        this.accepted_building_types = accepted_building_types;
+    }
 
-
-interface ConstructionPlace {
-    type: BuildingType[],
-    marker?: BuildingMarker
+    set_building_marker(building_marker: BuildingMarker) {
+        this.building_marker = building_marker;
+    }
 }
 
 
