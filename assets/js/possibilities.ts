@@ -209,16 +209,33 @@ class GameMap {
     }
 }
 
-interface Game {
-    players: Player[],
-    map: GameMap,
-    coal_demand_spot: number,
-    iron_demand_spot: number,
-    cotton_market_spot: number,
-    player_order: number[],
-    era: Era,
-    deck: number,
-    played_cards: Card[]
+class Game {
+    players: Player[];
+    map: GameMap;
+    coal_demand_spot: number;
+    iron_demand_spot: number;
+    cotton_market_spot: number;
+    player_order: number[];
+    era: Era;
+    deck: number;
+    played_cards: Card[];
+
+    constructor() {
+        this.players = [];
+        this.map = new GameMap();
+        this.coal_demand_spot = 7;
+        this.iron_demand_spot = 7;
+        this.cotton_market_spot = 5;
+        this.player_order = [];
+        this.era = Era.Canals;
+        this.deck = 40;
+        this.played_cards = [];
+    }
+
+    add_player(player: Player) {
+        player.id = this.players.length;
+        this.players.push(player);
+    }
 
 }
 
