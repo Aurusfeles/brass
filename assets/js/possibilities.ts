@@ -297,9 +297,8 @@ export class Game {
         this.played_cards = [];
     }
 
-    add_player(player: Player) {
-        player.id = this.players.length;
-        this.players.push(player);
+    add_player(name: string, color: string) {
+        this.players.push(new Player(this.players.length, name, color));
     }
 
 }

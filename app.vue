@@ -23,11 +23,10 @@ const canals = useCanals();
 
 
 
-<script>
+<script lang="ts">
 import base_map from "~/assets/js/map";
 import my_hand from "~/components/my_hand.vue";
-import * as possibilities from "~~/assets/js/possibilities";
-import game from "~/assets/js/example_game";
+import * as possibilities from "~/assets/js/possibilities";
 
 export default {
   components: {
@@ -38,7 +37,7 @@ export default {
       towns: {
         truc: "",
       },
-      game,
+      game: {},
       my_cards: [
         {
           type: "location",
@@ -66,6 +65,12 @@ export default {
         },
       ],
     };
+  },
+  mounted() {
+    let game = new possibilities.Game();
+    game.add_player("Aurus", "#FFAAAA");
+    game.add_player("Bob", "#AAFFAA");
+    game.map.set_building_marker();
   },
 };
 </script>
