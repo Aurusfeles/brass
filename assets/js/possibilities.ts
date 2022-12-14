@@ -260,11 +260,10 @@ export class GameMap {
         ]
     }
 
-    set_building_marker(building_coordinates: Coordinates, building_marker: BuildingMarker, coal_coordinates: Coordinates | "market", inron_coordinates: Coordinates | "market") {
+    set_building_marker(building_coordinates: Coordinates, building_marker: BuildingMarker, coal_coordinates: Coordinates | "market" | "none", inron_coordinates: Coordinates | "market" | "none") {
         if (coal_coordinates == "market") {
             // trouver un chemin jusqu'à un port
         }
-
         this.towns[building_coordinates.town_name].places[building_coordinates.construction_place_index].set_building_marker(building_marker);
     }
 }

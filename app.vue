@@ -1,10 +1,10 @@
 <template>
   <div>
-    <CoalMarket :market_spot="3" />
+    <!--<CoalMarket :market_spot="3" />
     <IronMarket :market_spot="2" />
     <div class="map">
       <div class="map_content">
-        <TownComponent v-for="(v, k) in towns" :key="k" :info="v" />
+        <TownComponent v-for="(v, k) in game.map.towns" :key="k" :info="v" />
         <CanalPlace
           v-for="(canal, index) in canals"
           :key="index"
@@ -12,11 +12,12 @@
         />
       </div>
     </div>
-    <MyHand :content="my_cards" />
+    <MyHand :content="my_cards" />-->
+    <TownComponent v-for="(v, k) in game.map.towns" :key="k" :info="v" />
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 const towns = useTowns();
 const canals = useCanals();
 </script>
@@ -29,48 +30,31 @@ import my_hand from "~/components/my_hand.vue";
 import * as possibilities from "~/assets/js/possibilities";
 
 export default {
-  components: {
-    my_hand,
-  },
   data() {
     return {
-      towns: {
-        truc: "",
-      },
-      game: {},
-      my_cards: [
-        {
-          type: "location",
-          location: "bury",
-        },
-        {
-          type: "location",
-          location: "manchester",
-        },
-        {
-          type: "location",
-          location: "colne",
-        },
-        {
-          type: "building",
-          building: "coal_mine",
-        },
-        {
-          type: "building",
-          building: "port",
-        },
-        {
-          type: "building",
-          building: "cotton_mill",
-        },
-      ],
+      game: new possibilities.Game(),
     };
   },
   mounted() {
     let game = new possibilities.Game();
     game.add_player("Aurus", "#FFAAAA");
     game.add_player("Bob", "#AAFFAA");
-    game.map.set_building_marker();
+    let coal_mine = game.players[0].building_marker_stock.pop_building_tile(
+      possibilities.BuildingType.CoalMine
+    );
+    if (coal_mine !== undefined) {
+      game.map.set_building_marker(
+        {
+          town_name: possibilities.TownName.Wigan,
+          construction_place_index: 0,
+        },
+
+        coal_mine,
+        "none",
+        "none"
+      );
+    }
+    this.game = game;
   },
 };
 </script>
