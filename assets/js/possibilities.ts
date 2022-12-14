@@ -1,4 +1,4 @@
-enum BuildingType {
+export enum BuildingType {
     CottonMill,
     CoalMine,
     Ironworks,
@@ -6,17 +6,17 @@ enum BuildingType {
     Shipyard,
 }
 
-enum CubeType {
+export enum CubeType {
     Iron,
     Coal
 }
 
-enum CardType {
+export enum CardType {
     Location,
     Building
 }
 
-enum TownName {
+export enum TownName {
     BarrowInFurness,
     Birkenhead,
     Blackburn,
@@ -45,14 +45,14 @@ enum TownName {
 
 }
 
-interface Card {
+export interface Card {
     type: CardType,
     location?: string,
     building?: BuildingType
 }
 
 
-class BuildingMarker {
+export class BuildingMarker {
     type: BuildingType;
     player: Number;
     level: number;
@@ -81,7 +81,7 @@ class BuildingMarker {
 }
 
 
-class BuildingMarkerStock {
+export class BuildingMarkerStock {
     ports: BuildingMarker[];
     cotton_mills: BuildingMarker[];
     ironworks: BuildingMarker[];
@@ -161,7 +161,7 @@ class BuildingMarkerStock {
     }
 }
 
-class Town {
+export class Town {
     name: string;
     places: ConstructionPlace[];
     constructor(name: string, places: ConstructionPlace[]) {
@@ -171,7 +171,7 @@ class Town {
 }
 
 
-class Player {
+export class Player {
     id: number;
     name: string;
     color: string;
@@ -195,12 +195,12 @@ class Player {
     }
 }
 
-enum Era {
+export enum Era {
     Canals,
     Rairoads
 }
 
-class GameMap {
+export class GameMap {
     towns: Record<TownName, Town>;
     canals: Canal[];
 
@@ -259,9 +259,22 @@ class GameMap {
             { link: [TownName.WarringtonAndRuncorn, TownName.EllesmerePort] }
         ]
     }
+
+    set_building_marker(building_coordinates: Coordinates, building_marker: BuildingMarker, coal_coordinates: Coordinates | "market", inron_coordinates: Coordinates | "market") {
+        if (coal_coordinates == "market") {
+            // trouver un chemin jusqu'à un port
+        }
+
+        this.towns[building_coordinates.town_name].places[building_coordinates.construction_place_index].set_building_marker(building_marker);
+    }
 }
 
-class Game {
+export interface Coordinates {
+    town_name: TownName,
+    construction_place_index: number
+}
+
+export class Game {
     players: Player[];
     map: GameMap;
     coal_demand_spot: number;
@@ -291,12 +304,12 @@ class Game {
 
 }
 
-interface Canal {
+export interface Canal {
     link: TownName[],
     player?: number,
 }
 
-class ConstructionPlace {
+export class ConstructionPlace {
     accepted_building_types: BuildingType[];
     building_marker?: BuildingMarker;
 
@@ -309,12 +322,7 @@ class ConstructionPlace {
     }
 }
 
-
-
-function construction_place_build_possibility(location, construction_place_index, player, game) {
-
-}
-
+/*
 export function build_possibilities_for_location(location, player, game) {
     let town = game.map.towns[location];
     if (game.era == "canals" && town.places.find((place) => place.building !== undefined && place.building.player == player)) {
@@ -346,4 +354,4 @@ export function build_possibilities_for_location(location, player, game) {
 
 export function build_possibilities_for_building(building, player, game) {
 
-}
+}*/
