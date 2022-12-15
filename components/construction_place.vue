@@ -1,28 +1,19 @@
 <template>
-  <div class="place" :style="style">
-    <component
-      :is="type"
-      :info="info"
-      style="width: 100%; height: 100%; position: relative"
-    ></component>
-    <div class="victory_points" :style="verso" :class="flipped">
-      {{ victory_points }}
+  <div class="place">
+    <div v-if="info !== undefined">
+      <div :class="image_class"></div>
+      <BuildingMarker :info="info.building_marker" />
     </div>
-    <div class="cubes">
-      <div v-for="(k, i) in cubes" :key="i" :class="'cube ' + cube_type"></div>
-    </div>
-    <div class="level">{{ level }}</div>
-    <div class="production" :style="recto">{{ production }}</div>
-    <div class="cost" :style="recto">{{ cost }}</div>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const players = usePlayers();
 </script>
 
 
-<script>
+<script lang="ts">
+import * as possibilities from "~/assets/js/possibilities";
 import port_place from "~/components/port_place.vue";
 import ironworks_place from "~/components/ironworks_place.vue";
 import coal_mine_place from "~/components/coal_mine_place.vue";
@@ -42,69 +33,12 @@ export default {
   },
   props: {
     info: {
-      type: Object,
+      type: possibilities.ConstructionPlace,
     },
   },
   computed: {
-    type() {
-      if (this.info.marker !== undefined) {
-        return this.info.marker.type + "_place";
-      } else {
-        return this.info.type + "_place";
-      }
-    },
-    style() {
-      return this.css_color;
-    },
-    verso() {
-      if (this.info.marker !== undefined) {
-        return this.info.marker.flipped ? "" : "display:none;";
-      }
+    image_class(building_type: possibilities.BuildingType) {
       return "";
-    },
-    recto() {
-      if (this.info.marker !== undefined) {
-        return this.info.marker.flipped ? "display:none;" : "";
-      }
-      return "";
-    },
-    cubes() {
-      if (this.info.marker !== undefined) {
-        return this.info.marker.coal_cubes || this.info.marker.iron_cubes || [];
-      }
-      return [];
-    },
-    cube_type() {
-      if (this.info.marker !== undefined) {
-        if (this.info.marker.coal_cubes !== undefined) {
-          return "coal";
-        } else if (this.info.marker.iron_cubes !== undefined) {
-          return "coal";
-        } else {
-          return "";
-        }
-      }
-      return "";
-    },
-    level() {
-      return this.info.marker !== undefined ? this.info.marker.level : "";
-    },
-    production() {
-      return this.info.marker !== undefined ? this.info.marker.production : "";
-    },
-    victory_points() {
-      return this.info.marker !== undefined ? this.info.marker.vp : "";
-    },
-    cost() {
-      return this.info.marker !== undefined ? this.info.marker.cost : "";
-    },
-    css_color() {
-      if (this.info.marker === undefined) {
-        return "background-color:lightgray";
-      }
-      return (
-        "background-color:" + this.players[this.info.marker.player].color + ";"
-      );
     },
   },
 };
@@ -122,60 +56,29 @@ export default {
   font-size: 11px;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
+  background-color: lightgray;
 }
 
-.place img {
-  max-width: 100%;
-  max-height: 100%;
-}
-
-.victory_points {
-  position: absolute;
-  background-color: hotpink;
-  bottom: 0px;
-  right: 0px;
-}
-
-.level {
-  position: absolute;
-  bottom: 0px;
-  left: 0px;
-}
-
-.production {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-}
-
-.cost {
-  position: absolute;
-  top: 0px;
-  right: 0px;
-}
-
-.coal {
-  background-color: hsl(0deg 0% 30%);
-}
-
-.iron {
-  background-color: hsl(30deg 80% 80%);
-}
-
-.flipped {
-  display: inherit;
-}
-
-.cubes {
-  position: relative;
-  display: flex;
-  flex-wrap: wrap;
+.image {
+  background-size: contain;
   width: 100%;
   height: 100%;
-  gap: 2px;
+  position: relative;
 }
-.cube {
-  width: 10px;
-  height: 10px;
+
+.coal_mine {
+  background-image: url("~/assets/images/coal_mine.png");
+}
+.cotton_mill {
+  background-image: url("~/assets/images/cotton_mill.png");
+}
+.port {
+  background-image: url("~/assets/images/port.png");
+}
+.shipyard {
+  background-image: url("~/assets/images/shipyard.png");
+}
+.ironworks {
+  background-image: url("~/assets/images/ironworks.png");
 }
 </style>
