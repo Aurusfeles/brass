@@ -1,5 +1,6 @@
 <template>
   <div>
+    <GameMap :info="game.map" />
     <!--<CoalMarket :market_spot="3" />
     <IronMarket :market_spot="2" />
     <div class="map">
@@ -12,8 +13,8 @@
         />
       </div>
     </div>
+    
     <MyHand :content="my_cards" />-->
-    <TownComponent v-for="(v, k) in game.map.towns" :key="k" :info="v" />
   </div>
 </template>
 
@@ -60,12 +61,4 @@ export default {
 </script>
 
 <style>
-.map {
-  height: 900px;
-  width: 700px;
-}
-
-.map_content {
-  position: relative;
-}
 </style>

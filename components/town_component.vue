@@ -1,7 +1,6 @@
 <template>
   <div class="town" :style="position">
-    <div v-if="info != undefined">
-      <div>{{ info.name }}</div>
+    <div :id="info.name">
       <div class="place_group">
         <ConstructionPlace
           v-for="(place, index) in info.places"
@@ -21,8 +20,13 @@ export default {
     construction_place,
   },
   props: {
+    name: {
+      type: String,
+      required: true,
+    },
     info: {
       type: possibilities.Town,
+      required: true,
     },
   },
   computed: {
@@ -43,5 +47,8 @@ export default {
 .place_group {
   display: flex;
   flex-wrap: wrap;
+}
+
+#Bury {
 }
 </style>

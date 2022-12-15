@@ -1,47 +1,47 @@
 export enum BuildingType {
-    CottonMill,
-    CoalMine,
-    Ironworks,
-    Port,
-    Shipyard,
+    CottonMill = "cotton_mill",
+    CoalMine = "coal_mine",
+    Ironworks = "ironworks",
+    Port = "port",
+    Shipyard = "shipyard",
 }
 
 export enum CubeType {
-    Iron,
-    Coal
+    Iron = "iron",
+    Coal = "coal"
 }
 
 export enum CardType {
-    Location,
-    Building
+    Location = "location",
+    Building = "building"
 }
 
 export enum TownName {
-    BarrowInFurness,
-    Birkenhead,
-    Blackburn,
-    Blackpool,
-    Bolton,
-    Burnley,
-    Bury,
-    Colne,
-    EllesmerePort,
-    Fleetwood,
-    Lancaster,
-    Liverpool,
-    Macclesfield,
-    Manchester,
-    Northwich,
-    Oldham,
-    Preston,
-    Rochdale,
-    Scotland,
-    Southport,
-    Stockport,
-    TheMidlands,
-    WarringtonAndRuncorn,
-    Wigan,
-    Yorkshire,
+    BarrowInFurness = "barrow_in_furness",
+    Birkenhead = "birkenhead",
+    Blackburn = "blackburn",
+    Blackpool = "blockpool",
+    Bolton = "bolton",
+    Burnley = "burnley",
+    Bury = "bury",
+    Colne = "colne",
+    EllesmerePort = "ellesmere_port",
+    Fleetwood = "fleetwood",
+    Lancaster = "lancaster",
+    Liverpool = "liverpool",
+    Macclesfield = "macclesfield",
+    Manchester = "manchester",
+    Northwich = "northwich",
+    Oldham = "oldham",
+    Preston = "preston",
+    Rochdale = "rochdale",
+    Scotland = "scotland",
+    Southport = "southport",
+    Stockport = "stockport",
+    TheMidlands = "the_midlands",
+    WarringtonAndRuncorn = "warrington_and_runcorn",
+    Wigan = "wigan",
+    Yorkshire = "yorkshire",
 
 }
 
