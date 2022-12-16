@@ -3,9 +3,12 @@
     <div class="background">
       <div :class="first_image_class"></div>
 
-      <div :class="second_image_class"></div>
+      <div v-if="is_multi" :class="second_image_class"></div>
     </div>
-    <BuildingMarker :info="info.building_marker" />
+    <BuildingMarker
+      v-if="info.building_marker !== undefined"
+      :info="info.building_marker"
+    />
   </div>
 </template>
 
@@ -37,7 +40,7 @@ export default {
       return image_class;
     },
     second_image_class() {
-      let image_class = "image half bottom_right";
+      let image_class = "image half bottom_right ";
       image_class += this.info.accepted_building_types[1];
       return image_class;
     },
@@ -48,12 +51,10 @@ export default {
 <style>
 .place {
   position: relative;
-  width: 32px;
-  height: 32px;
-  border: 1px solid black;
-  border-radius: 4px;
-  margin: 2px 2px;
+  width: 31px;
+  height: 31px;
   padding: 2px 2px;
+  border: 1px solid black;
   font-size: 11px;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
@@ -62,8 +63,8 @@ export default {
 
 .image {
   background-size: contain;
-  width: 100%;
-  height: 100%;
+  width: 31px;
+  height: 31px;
   position: relative;
 }
 

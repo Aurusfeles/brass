@@ -59,6 +59,7 @@ export class BuildingMarker {
     cost: number;
     income: number;
     victory_points: number;
+    flipped: boolean;
     needs_coal: boolean;
     needs_iron: boolean;
     cube_production?: number;
@@ -72,11 +73,16 @@ export class BuildingMarker {
         this.cost = cost;
         this.income = income;
         this.victory_points = victory_points;
+        this.flipped = false;
         this.needs_coal = needs_coal;
         this.needs_iron = needs_iron;
         this.cube_production = cube_production;
         this.cube_type = cube_type;
         this.cube_quantity = this.cube_production;
+    }
+
+    flip() {
+        this.flipped = true;
     }
 }
 

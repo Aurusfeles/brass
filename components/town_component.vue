@@ -1,13 +1,11 @@
 <template>
-  <div class="town" :style="position">
-    <div :id="info.name">
-      <div class="place_group">
-        <ConstructionPlace
-          v-for="(place, index) in info.places"
-          :key="index"
-          :info="place"
-        />
-      </div>
+  <div class="town" :id="name">
+    <div class="place_group">
+      <ConstructionPlace
+        v-for="(place, index) in info.places"
+        :key="index"
+        :info="place"
+      />
     </div>
   </div>
 </template>
@@ -29,26 +27,52 @@ export default {
       required: true,
     },
   },
-  computed: {
-    position() {
-      //return `top:${this.info.position.y}px;left:${this.info.position.x}px;`;
-      return "";
-    },
-  },
 };
 </script>
 
 <style>
 .town {
   position: absolute;
-  width: 90px;
 }
 
 .place_group {
+  position: relative;
   display: flex;
-  flex-wrap: wrap;
 }
 
-#Bury {
+#bury {
+  left: 414px;
+  top: 364px;
+}
+
+#rochdale {
+  left: 525px;
+  top: 342px;
+}
+
+#colne {
+  left: 489px;
+  top: 172px;
+}
+
+#burnley {
+  left: 398px;
+  top: 227px;
+}
+#oldham {
+  left: 493px;
+  top: 414px;
+}
+#lancaster {
+  left: 176px;
+  top: 94px;
+}
+#stockport {
+  left: 441px;
+  top: 581px;
+}
+#maclesfield {
+  left: 431px;
+  top: 651px;
 }
 </style>
