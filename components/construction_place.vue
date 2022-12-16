@@ -1,6 +1,10 @@
 <template>
   <div class="place">
-    <div :class="image_class"></div>
+    <div class="background">
+      <div :class="first_image_class"></div>
+
+      <div :class="second_image_class"></div>
+    </div>
     <BuildingMarker :info="info.building_marker" />
   </div>
 </template>
@@ -21,8 +25,21 @@ export default {
     },
   },
   computed: {
-    image_class(building_type: possibilities.BuildingType) {
-      return "image " + this.info?.accepted_building_types[0];
+    is_multi() {
+      return this.info.accepted_building_types.length == 2;
+    },
+    first_image_class() {
+      let image_class = "image ";
+      image_class += this.info.accepted_building_types[0];
+      if (this.is_multi) {
+        image_class += " half";
+      }
+      return image_class;
+    },
+    second_image_class() {
+      let image_class = "image half bottom_right";
+      image_class += this.info.accepted_building_types[1];
+      return image_class;
     },
   },
 };

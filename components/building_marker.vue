@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="image" />
-    <div class="victory_points" :style="verso" :class="flipped">
+    <div class="victory_points" :style="verso">
       {{ victory_points }}
     </div>
     <div class="cubes">
@@ -19,32 +19,21 @@ export default {
   props: {
     info: {
       type: possibilities.BuildingMarker,
+      required: true,
     },
   },
   computed: {
     verso() {
-      if (this.info !== undefined) {
-        return this.info.flipped ? "" : "display:none;";
-      }
-      return "";
+      return this.info.flipped ? "" : "display:none;";
     },
     recto() {
-      if (this.info !== undefined) {
-        return this.info.flipped ? "display:none;" : "";
-      }
-      return "";
+      return this.info.flipped ? "display:none;" : "";
     },
     cubes() {
-      if (this.info !== undefined) {
-        return this.info.cube_quantity;
-      }
-      return 0;
+      return this.info.cube_quantity;
     },
     cube_type() {
-      if (this.info !== undefined) {
-        return this.cube_type;
-      }
-      return "";
+      return this.cube_type;
     },
     level() {
       return this.info !== undefined ? this.info.level : "";
