@@ -9,7 +9,7 @@ const towns = useTowns();
 const players = usePlayers();
 </script>
 
-<script>
+<script lang="ts">
 export default {
   props: {
     info: {

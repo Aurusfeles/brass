@@ -28,7 +28,7 @@ export default {
   },
   computed: {
     color_style() {
-      return this.players[this.info.player].color;
+      return this.pla;
     },
     verso() {
       return this.info.flipped ? "" : "display:none;";
