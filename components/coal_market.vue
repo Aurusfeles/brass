@@ -17,7 +17,7 @@ export default {
     };
   },
   props: {
-    market_spot: { type: Number },
+    market_spot: { type: number },
   },
 };
 </script>

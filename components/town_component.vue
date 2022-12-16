@@ -75,4 +75,40 @@ export default {
   left: 431px;
   top: 651px;
 }
+
+#wigan {
+  left: 175px;
+  top: 401px;
+}
+
+#fleetwood {
+  left: 85px;
+  top: 165px;
+}
+
+#bolton {
+  left: 295px;
+  top: 365px;
+}
+
+#preston {
+  left: 194px;
+  top: 220px;
+}
+#preston .place:nth-child(1) {
+  position: absolute;
+  left: -18px;
+  top: 36px;
+}
+#preston .place:nth-child(2) {
+  position: absolute;
+  left: 19px;
+  top: 36px;
+}
+
+#bolton .place:nth-child(2) {
+  position: absolute;
+  left: 17px;
+  top: 36px;
+}
 </style>

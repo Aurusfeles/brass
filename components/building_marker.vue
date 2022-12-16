@@ -13,7 +13,11 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
+const players = usePlayers();
+</script>
+
+<script lang="ts">
 import * as possibilities from "~/assets/js/possibilities";
 export default {
   props: {
@@ -23,6 +27,9 @@ export default {
     },
   },
   computed: {
+    color_style() {
+      return this.players[this.info.player].color;
+    },
     verso() {
       return this.info.flipped ? "" : "display:none;";
     },
@@ -33,16 +40,16 @@ export default {
       return this.info.cube_quantity;
     },
     cube_type() {
-      return this.cube_type;
+      return this.info.cube_type;
     },
     level() {
       return this.info !== undefined ? this.info.level : "";
     },
     production() {
-      return this.info !== undefined ? this.info.production : "";
+      return this.info !== undefined ? this.info.cube_production : "";
     },
     victory_points() {
-      return this.info !== undefined ? this.info.vp : "";
+      return this.info !== undefined ? this.info.victory_points : "";
     },
     cost() {
       return this.info !== undefined ? this.info.cost : "";

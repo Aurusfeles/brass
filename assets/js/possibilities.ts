@@ -54,7 +54,7 @@ export interface Card {
 
 export class BuildingMarker {
     type: BuildingType;
-    player: Number;
+    player: keyof typeof Player;
     level: number;
     cost: number;
     income: number;
@@ -66,7 +66,7 @@ export class BuildingMarker {
     cube_type?: CubeType;
     cube_quantity?: number;
 
-    constructor(type: BuildingType, player: number, level: number, cost: number, income: number, victory_points: number, needs_coal: boolean, needs_iron: boolean, cube_production?: number, cube_type?: CubeType) {
+    constructor(type: BuildingType, player: keyof typeof Player, level: number, cost: number, income: number, victory_points: number, needs_coal: boolean, needs_iron: boolean, cube_production?: number, cube_type?: CubeType) {
         this.type = type;
         this.player = player;
         this.level = level;
@@ -94,7 +94,7 @@ export class BuildingMarkerStock {
     shipyards: BuildingMarker[];
     coal_mines: BuildingMarker[];
 
-    constructor(player: number) {
+    constructor(player: keyof typeof Player) {
         this.ports = [];
         this.ports.push(new BuildingMarker(BuildingType.Port, player, 1, 6, 3, 2, false, false));
         this.ports.push(new BuildingMarker(BuildingType.Port, player, 1, 6, 3, 2, false, false));
@@ -188,7 +188,7 @@ export class Player {
     building_marker_stock: BuildingMarkerStock;
     route_marker_stock: number;
 
-    constructor(id: number, name: string, color: string) {
+    constructor(id: keyof typeof Player, name: string, color: string) {
         this.id = id;
         this.name = name;
         this.color = color;
