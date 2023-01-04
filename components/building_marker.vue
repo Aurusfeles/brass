@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :style="color_style">
     <div class="image" />
     <div class="victory_points" :style="verso">
       {{ victory_points }}
@@ -14,7 +14,8 @@
 </template>
 
 <script setup lang="ts">
-const players = usePlayers();
+import { useGameStore } from "@/stores/game_store";
+const game_store = useGameStore();
 </script>
 
 <script lang="ts">
@@ -27,8 +28,13 @@ export default {
     },
   },
   computed: {
+    players() {
+      return game_store.players;
+    },
     color_style() {
-      return this.pla;
+      return (
+        "background-color: '" + this.players[this.info.player].color + "';"
+      );
     },
     verso() {
       return this.info.flipped ? "" : "display:none;";

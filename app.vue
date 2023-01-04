@@ -1,6 +1,6 @@
 <template>
   <div>
-    <GameMap :info="game.map" />
+    <GameMap :info="map" />
     <!--<CoalMarket :market_spot="3" />
     <IronMarket :market_spot="2" />
     <div class="map">
@@ -19,16 +19,13 @@
 </template>
 
 <script lang="ts" setup>
-const game = useGame();
+import { useGameStore } from "@/stores/game_store";
+const { map } = useGameStore();
 </script>
 
 
 
 <script lang="ts">
-import base_map from "~/assets/js/map";
-import my_hand from "~/components/my_hand.vue";
-import * as possibilities from "~/assets/js/possibilities";
-
 export default {
   data() {},
   mounted() {},

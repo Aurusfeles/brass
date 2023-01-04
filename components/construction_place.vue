@@ -13,7 +13,6 @@
 </template>
 
 <script setup lang="ts">
-const players = usePlayers();
 </script>
 
 
