@@ -11,13 +11,14 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import * as possibilities from "~/assets/js/possibilities";
-export default {
-  props: {
-    info: possibilities.GameMap,
+const props = defineProps({
+  info: {
+    type: possibilities.GameMap,
+    required: true,
   },
-};
+});
 </script>
 
 <style>

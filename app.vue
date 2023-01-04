@@ -23,14 +23,5 @@ import { useGameStore } from "@/stores/game_store";
 const { map } = useGameStore();
 </script>
 
-
-
-<script lang="ts">
-export default {
-  data() {},
-  mounted() {},
-};
-</script>
-
 <style>
 </style>

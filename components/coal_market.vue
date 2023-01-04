@@ -1,7 +1,7 @@
 <template>
   <div class="market">
     <div>Coal</div>
-    <div v-for="(cost, index) in costs" :key="index" class="spot">
+    <div v-for="(cost, index) in state.costs" :key="index" class="spot">
       {{ cost + "£" }}
       <div v-if="index >= market_spot">X</div>
     </div>
@@ -9,17 +9,16 @@
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      costs: [1, 1, 2, 2, 3, 3, 4, 4],
-    };
+<script setup lang="ts">
+import { reactive } from "vue";
+const state = reactive({ costs: [1, 1, 2, 2, 3, 3, 4, 4] });
+
+const props = defineProps({
+  market_spot: {
+    type: Number,
+    required: true,
   },
-  props: {
-    market_spot: { type: number },
-  },
-};
+});
 </script>
 
 <style scoped>

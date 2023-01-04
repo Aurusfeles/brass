@@ -6,29 +6,20 @@
 
 <script setup>
 import { useGameStore } from "@/stores/game_store";
-const game_store = useGameStore();
-</script>
+const { players } = useGameStore();
+const props = defineProps({
+  info: {
+    type: Object,
+    required: true,
+  },
+});
 
-<script lang="ts">
-export default {
-  props: {
-    info: {
-      type: Object,
-      required: true,
-    },
-  },
-  computed: {
-    players() {
-      return game_store.players;
-    },
-    css_color() {
-      if (this.info.player === undefined) {
-        return "";
-      }
-      return "background-color:" + this.players[this.info.player].color + ";";
-    },
-  },
-};
+const css_color = computed(() => {
+  if (props.info.player === undefined) {
+    return "";
+  }
+  return "background-color:" + players[props.info.player].color + ";";
+});
 </script>
 
 <style>

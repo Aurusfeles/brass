@@ -13,7 +13,7 @@ export const useGameStore = defineStore('game', {
         if (coal_mine !== undefined) {
             game.map.set_building_marker(
                 {
-                    town_name: possibilities.TownName.Wigan,
+                    town_name: possibilities.TownName.Bolton,
                     construction_place_index: 0,
                 },
 

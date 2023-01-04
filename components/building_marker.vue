@@ -15,54 +15,54 @@
 
 <script setup lang="ts">
 import { useGameStore } from "~/stores/game_store";
+import * as possibilities from "~/assets/js/possibilities";
+
 const { players } = useGameStore();
+
+const props = defineProps({
+  info: {
+    type: possibilities.BuildingMarker,
+    required: true,
+  },
+});
+
+const image_class = computed(() => {
+  let image_class = "image ";
+  image_class += props.info.type;
+  return image_class;
+});
+
+const color_style = computed(() => {
+  return "background-color: " + players[props.info.player].color + ";";
+});
+
+const verso = computed(() => {
+  return props.info.flipped ? "" : "display:none;";
+});
+const recto = computed(() => {
+  return props.info.flipped ? "display:none;" : "";
+});
+const cubes = computed(() => {
+  return props.info.cube_quantity;
+});
+const cube_type = computed(() => {
+  return props.info.cube_type;
+});
+
+const level = computed(() => {
+  return props.info !== undefined ? props.info.level : "";
+});
+const production = computed(() => {
+  return props.info !== undefined ? props.info.cube_production : "";
+});
+const victory_points = computed(() => {
+  return props.info.victory_points;
+});
+const cost = computed(() => {
+  return props.info.cost;
+});
 </script>
 
-<script lang="ts">
-import * as possibilities from "~/assets/js/possibilities";
-export default {
-  props: {
-    info: {
-      type: possibilities.BuildingMarker,
-      required: true,
-    },
-  },
-  computed: {
-    image_class() {
-      let image_class = "image ";
-      image_class += this.info.type;
-      return image_class;
-    },
-    color_style() {
-      return "background-color: " + this.players[this.info.player].color + ";";
-    },
-    verso() {
-      return this.info.flipped ? "" : "display:none;";
-    },
-    recto() {
-      return this.info.flipped ? "display:none;" : "";
-    },
-    cubes() {
-      return this.info.cube_quantity;
-    },
-    cube_type() {
-      return this.info.cube_type;
-    },
-    level() {
-      return this.info !== undefined ? this.info.level : "";
-    },
-    production() {
-      return this.info !== undefined ? this.info.cube_production : "";
-    },
-    victory_points() {
-      return this.info !== undefined ? this.info.victory_points : "";
-    },
-    cost() {
-      return this.info !== undefined ? this.info.cost : "";
-    },
-  },
-};
-</script>
 
 <style>
 .multiple {

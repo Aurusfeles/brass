@@ -11,49 +11,28 @@
       </div>
     </div>
     <div class="possibilities">
-      <div v-for="(v, k) in possibilities" :key="k">
+      <div v-for="(v, k) in state.playing_possibilities" :key="k">
         {{ v }}
       </div>
     </div>
   </div>
 </template>
 
-<script setup>
-const towns = useTowns();
-const players = usePlayers();
+<script setup lang="ts">
+import * as possibilities from "~/assets/js/possibilities";
+const state = reactive({ playing_possibilities: [] });
+const props = defineProps({
+  content: {
+    type: Array,
+    required: true,
+  },
+});
+
+function card_click(card: possibilities.Card) {
+  alert("clic! ");
+}
 </script>
 
-<script>
-export default {
-  data() {
-    return {
-      possibilities: [],
-    };
-  },
-  props: {
-    content: {
-      type: Array,
-    },
-  },
-  methods: {
-    card_click(card) {
-      this.possibilities.push(this.build_possibilities(card));
-    },
-    build_possibilities(card) {
-      console.log(card);
-      if (card.type == "location") {
-        return this.build_possibilities_for_location(card.location);
-      } else {
-        return this.build_possibilities_for_building(card.building);
-      }
-    },
-    build_possibilities_for_location(location) {
-      let town = this.towns[location];
-    },
-    build_possibilities_for_building(building) {},
-  },
-};
-</script>
 
 <style>
 .hand {

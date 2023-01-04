@@ -11,24 +11,18 @@
   </div>
 </template>
 
-<script lang="ts">
-import construction_place from "~/components/construction_place.vue";
+<script setup lang="ts">
 import * as possibilities from "~/assets/js/possibilities";
-export default {
-  components: {
-    construction_place,
+const props = defineProps({
+  name: {
+    type: String,
+    required: true,
   },
-  props: {
-    name: {
-      type: String,
-      required: true,
-    },
-    info: {
-      type: possibilities.Town,
-      required: true,
-    },
+  info: {
+    type: possibilities.Town,
+    required: true,
   },
-};
+});
 </script>
 
 <style>
