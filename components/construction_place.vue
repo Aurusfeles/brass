@@ -1,11 +1,9 @@
 <template>
   <div class="place">
-    <div class="background">
-      <div :class="first_image_class"></div>
-
-      <div v-if="is_multi" :class="second_image_class"></div>
-    </div>
+    <div :class="first_image_class"></div>
+    <div v-if="is_multi" :class="second_image_class"></div>
     <BuildingMarker
+      class="marker"
       v-if="info.building_marker !== undefined"
       :info="info.building_marker"
     />
@@ -48,11 +46,16 @@ export default {
 </script>
 
 <style>
+.marker {
+  position: absolute;
+  width: 33px;
+  height: 33px;
+}
+
 .place {
   position: relative;
-  width: 31px;
-  height: 31px;
-  padding: 2px 2px;
+  width: 33px;
+  height: 33px;
   border: 1px solid black;
   font-size: 11px;
   font-family: Arial, Helvetica, sans-serif;
@@ -61,10 +64,10 @@ export default {
 }
 
 .image {
+  position: absolute;
   background-size: contain;
   width: 31px;
   height: 31px;
-  position: relative;
 }
 
 .half {

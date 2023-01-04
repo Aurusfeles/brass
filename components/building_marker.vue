@@ -1,6 +1,6 @@
 <template>
   <div :style="color_style">
-    <div class="image" />
+    <div :class="image_class" />
     <div class="victory_points" :style="verso">
       {{ victory_points }}
     </div>
@@ -14,8 +14,8 @@
 </template>
 
 <script setup lang="ts">
-import { useGameStore } from "@/stores/game_store";
-const game_store = useGameStore();
+import { useGameStore } from "~/stores/game_store";
+const { players } = useGameStore();
 </script>
 
 <script lang="ts">
@@ -28,13 +28,13 @@ export default {
     },
   },
   computed: {
-    players() {
-      return game_store.players;
+    image_class() {
+      let image_class = "image ";
+      image_class += this.info.type;
+      return image_class;
     },
     color_style() {
-      return (
-        "background-color: '" + this.players[this.info.player].color + "';"
-      );
+      return "background-color: " + this.players[this.info.player].color + ";";
     },
     verso() {
       return this.info.flipped ? "" : "display:none;";
@@ -132,5 +132,21 @@ export default {
 .cube {
   width: 10px;
   height: 10px;
+}
+
+.coal_mine {
+  background-image: url("~/assets/images/coal_mine.png");
+}
+.cotton_mill {
+  background-image: url("~/assets/images/cotton_mill.png");
+}
+.port {
+  background-image: url("~/assets/images/port.png");
+}
+.shipyard {
+  background-image: url("~/assets/images/shipyard.png");
+}
+.ironworks {
+  background-image: url("~/assets/images/ironworks.png");
 }
 </style>

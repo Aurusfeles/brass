@@ -5,6 +5,7 @@
         v-for="(place, index) in info.places"
         :key="index"
         :info="place"
+        class="place"
       />
     </div>
   </div>
@@ -31,6 +32,9 @@ export default {
 </script>
 
 <style>
+.place {
+  margin: 1px 1px;
+}
 .town {
   position: absolute;
 }

@@ -22,8 +22,7 @@ export const useGameStore = defineStore('game', {
                 "none"
             );
         }
-        console.log("YO!");
-        return game;
+        return { ...game };
 
     }
 })
