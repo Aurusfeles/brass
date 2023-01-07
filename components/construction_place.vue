@@ -27,7 +27,7 @@ const is_multi = computed(() => {
 const first_image_class = computed(() => {
   let image_class = "image ";
   image_class += props.info.accepted_building_types[0];
-  if (is_multi) {
+  if (is_multi.value) {
     image_class += " half";
   }
   return image_class;

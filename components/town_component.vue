@@ -38,9 +38,40 @@ const props = defineProps({
   display: flex;
 }
 
+#barrow_in_furness {
+  left: 31px;
+  top: 58px;
+}
+
+#blackburn {
+  left: 331px;
+  top: 255px;
+}
+#blackburn .place:nth-child(1) {
+  position: absolute;
+  left: -18px;
+  top: 37px;
+}
+
+#blackburn .place:nth-child(2) {
+  position: absolute;
+  left: 19px;
+  top: 37px;
+}
+
+#birkenhead {
+  left: 67px;
+  top: 509px;
+}
+
 #bury {
   left: 414px;
   top: 364px;
+}
+
+#ellesmere_port {
+  left: 171px;
+  top: 581px;
 }
 
 #rochdale {
@@ -65,13 +96,65 @@ const props = defineProps({
   left: 176px;
   top: 94px;
 }
+
+#liverpool {
+  left: 67px;
+  top: 400px;
+}
+
+#liverpool .place:nth-child(2) {
+  position: absolute;
+  left: 0px;
+  top: 37px;
+}
+
+#liverpool .place:nth-child(3) {
+  position: absolute;
+  left: 37px;
+  top: 37px;
+}
+
 #stockport {
   left: 441px;
   top: 581px;
 }
-#maclesfield {
+
+#macclesfield {
   left: 431px;
   top: 651px;
+}
+
+#manchester {
+  left: 424px;
+  top: 437px;
+}
+
+#manchester .place:nth-child(1) {
+  position: absolute;
+  left: -20px;
+  top: 36px;
+}
+#manchester .place:nth-child(2) {
+  position: absolute;
+  left: 18px;
+  top: 36px;
+}
+
+#manchester .place:nth-child(4) {
+  position: absolute;
+  left: -1px;
+  top: 73px;
+}
+
+#warrington_and_runcorn {
+  left: 242px;
+  top: 472px;
+}
+
+#warrington_and_runcorn .place:nth-child(2) {
+  position: absolute;
+  left: 0px;
+  top: 37px;
 }
 
 #wigan {
