@@ -59,7 +59,7 @@ export default {
             burnley: {
                 name: "Burnley",
                 places: [{
-                    type: "cotton_mill_or_coal_mine", marker: {
+                    type: "cotton_mill_or_coal_mine", counter: {
                         type: "cotton_mill",
                         player: 0,
                         level: 1,
@@ -100,7 +100,7 @@ export default {
             wigan: {
                 name: "Wigan",
                 places: [{
-                    type: "coal_mine", marker: {
+                    type: "coal_mine", counter: {
                         type: "coal_mine",
                         player: 1,
                         level: 1,
@@ -144,7 +144,7 @@ export default {
             warrington_runcorn: {
                 name: "Warrington & Runcorn",
                 places: [{
-                    type: "cotton_mill_or_coal_mine", marker: {
+                    type: "cotton_mill_or_coal_mine", counter: {
                         type: "coal_mine",
                         player: 1,
                         level: 1,
@@ -280,7 +280,7 @@ export default {
             cards: [
                 "cotton_mill", "port", "manchester", "burnley", "port", "ironworks", "coal_mine", "fleetwood"
             ],
-            markers: {
+            counters: {
                 canals: 6,
                 rails: 10,
                 cotton_mills: [
@@ -527,7 +527,7 @@ export default {
             cards: [
                 "lancaster", "manchester", "liverpool", "port", "ironworks", "port", "rochdale"
             ],
-            markers: {
+            counters: {
                 canals: 7,
                 rails: 10,
                 cotton_mills: [

@@ -21,7 +21,7 @@ const { players } = useGameStore();
 
 const props = defineProps({
   info: {
-    type: possibilities.BuildingMarker,
+    type: possibilities.BuildingCounter,
     required: true,
   },
 });
@@ -126,6 +126,7 @@ const cost = computed(() => {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
+  padding: 5px 5px;
   height: 100%;
   gap: 2px;
 }

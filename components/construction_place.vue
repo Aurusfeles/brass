@@ -2,10 +2,10 @@
   <div class="place">
     <div :class="first_image_class"></div>
     <div v-if="is_multi" :class="second_image_class"></div>
-    <BuildingMarker
-      class="marker"
-      v-if="info.building_marker !== undefined"
-      :info="info.building_marker"
+    <BuildingCounter
+      class="counter"
+      v-if="info.building_counter !== undefined"
+      :info="info.building_counter"
     />
   </div>
 </template>
@@ -42,7 +42,7 @@ const second_image_class = computed(() => {
 
 
 <style>
-.marker {
+.counter {
   position: absolute;
   width: 33px;
   height: 33px;

@@ -7,11 +7,11 @@ export const useGameStore = defineStore('game', {
         let game = new possibilities.Game();
         game.add_player("Aurus", "#FFAAAA");
         game.add_player("Bob", "#AAFFAA");
-        let coal_mine = game.players[0].building_marker_stock.pop_building_tile(
+        let coal_mine = game.players[0].building_counter_stock.pop_building_tile(
             possibilities.BuildingType.CoalMine
         );
         if (coal_mine !== undefined) {
-            game.map.set_building_marker(
+            game.map.set_building_counter(
                 {
                     town_name: possibilities.TownName.Bolton,
                     construction_place_index: 0,

@@ -52,7 +52,7 @@ export interface Card {
 }
 
 
-export class BuildingMarker {
+export class BuildingCounter {
     type: BuildingType;
     player: number;
     level: number;
@@ -87,63 +87,63 @@ export class BuildingMarker {
 }
 
 
-export class BuildingMarkerStock {
-    ports: BuildingMarker[];
-    cotton_mills: BuildingMarker[];
-    ironworks: BuildingMarker[];
-    shipyards: BuildingMarker[];
-    coal_mines: BuildingMarker[];
+export class BuildingCounterStock {
+    ports: BuildingCounter[];
+    cotton_mills: BuildingCounter[];
+    ironworks: BuildingCounter[];
+    shipyards: BuildingCounter[];
+    coal_mines: BuildingCounter[];
 
     constructor(player: number) {
         this.ports = [];
-        this.ports.push(new BuildingMarker(BuildingType.Port, player, 1, 6, 3, 2, false, false));
-        this.ports.push(new BuildingMarker(BuildingType.Port, player, 1, 6, 3, 2, false, false));
-        this.ports.push(new BuildingMarker(BuildingType.Port, player, 2, 7, 3, 4, false, false));
-        this.ports.push(new BuildingMarker(BuildingType.Port, player, 2, 7, 3, 4, false, false));
-        this.ports.push(new BuildingMarker(BuildingType.Port, player, 3, 8, 4, 6, false, false));
-        this.ports.push(new BuildingMarker(BuildingType.Port, player, 3, 8, 4, 6, false, false));
-        this.ports.push(new BuildingMarker(BuildingType.Port, player, 4, 9, 4, 9, false, false));
+        this.ports.push(new BuildingCounter(BuildingType.Port, player, 1, 6, 3, 2, false, false));
+        this.ports.push(new BuildingCounter(BuildingType.Port, player, 1, 6, 3, 2, false, false));
+        this.ports.push(new BuildingCounter(BuildingType.Port, player, 2, 7, 3, 4, false, false));
+        this.ports.push(new BuildingCounter(BuildingType.Port, player, 2, 7, 3, 4, false, false));
+        this.ports.push(new BuildingCounter(BuildingType.Port, player, 3, 8, 4, 6, false, false));
+        this.ports.push(new BuildingCounter(BuildingType.Port, player, 3, 8, 4, 6, false, false));
+        this.ports.push(new BuildingCounter(BuildingType.Port, player, 4, 9, 4, 9, false, false));
 
         this.cotton_mills = [];
-        this.cotton_mills.push(new BuildingMarker(BuildingType.CottonMill, player, 1, 12, 5, 3, false, false));
-        this.cotton_mills.push(new BuildingMarker(BuildingType.CottonMill, player, 1, 12, 5, 3, false, false));
-        this.cotton_mills.push(new BuildingMarker(BuildingType.CottonMill, player, 1, 12, 5, 3, false, false));
-        this.cotton_mills.push(new BuildingMarker(BuildingType.CottonMill, player, 2, 14, 4, 5, true, false));
-        this.cotton_mills.push(new BuildingMarker(BuildingType.CottonMill, player, 2, 14, 4, 5, true, false));
-        this.cotton_mills.push(new BuildingMarker(BuildingType.CottonMill, player, 2, 14, 4, 5, true, false));
-        this.cotton_mills.push(new BuildingMarker(BuildingType.CottonMill, player, 3, 16, 3, 9, true, true));
-        this.cotton_mills.push(new BuildingMarker(BuildingType.CottonMill, player, 3, 16, 3, 9, true, true));
-        this.cotton_mills.push(new BuildingMarker(BuildingType.CottonMill, player, 3, 16, 3, 9, true, true));
-        this.cotton_mills.push(new BuildingMarker(BuildingType.CottonMill, player, 3, 18, 2, 12, true, true));
-        this.cotton_mills.push(new BuildingMarker(BuildingType.CottonMill, player, 3, 18, 2, 12, true, true));
-        this.cotton_mills.push(new BuildingMarker(BuildingType.CottonMill, player, 3, 18, 2, 12, true, true));
+        this.cotton_mills.push(new BuildingCounter(BuildingType.CottonMill, player, 1, 12, 5, 3, false, false));
+        this.cotton_mills.push(new BuildingCounter(BuildingType.CottonMill, player, 1, 12, 5, 3, false, false));
+        this.cotton_mills.push(new BuildingCounter(BuildingType.CottonMill, player, 1, 12, 5, 3, false, false));
+        this.cotton_mills.push(new BuildingCounter(BuildingType.CottonMill, player, 2, 14, 4, 5, true, false));
+        this.cotton_mills.push(new BuildingCounter(BuildingType.CottonMill, player, 2, 14, 4, 5, true, false));
+        this.cotton_mills.push(new BuildingCounter(BuildingType.CottonMill, player, 2, 14, 4, 5, true, false));
+        this.cotton_mills.push(new BuildingCounter(BuildingType.CottonMill, player, 3, 16, 3, 9, true, true));
+        this.cotton_mills.push(new BuildingCounter(BuildingType.CottonMill, player, 3, 16, 3, 9, true, true));
+        this.cotton_mills.push(new BuildingCounter(BuildingType.CottonMill, player, 3, 16, 3, 9, true, true));
+        this.cotton_mills.push(new BuildingCounter(BuildingType.CottonMill, player, 3, 18, 2, 12, true, true));
+        this.cotton_mills.push(new BuildingCounter(BuildingType.CottonMill, player, 3, 18, 2, 12, true, true));
+        this.cotton_mills.push(new BuildingCounter(BuildingType.CottonMill, player, 3, 18, 2, 12, true, true));
 
         this.coal_mines = [];
-        this.coal_mines.push(new BuildingMarker(BuildingType.CoalMine, player, 1, 5, 4, 1, false, false, 2, CubeType.Coal));
-        this.coal_mines.push(new BuildingMarker(BuildingType.CoalMine, player, 2, 7, 7, 2, false, false, 3, CubeType.Coal));
-        this.coal_mines.push(new BuildingMarker(BuildingType.CoalMine, player, 2, 7, 7, 2, false, false, 3, CubeType.Coal));
-        this.coal_mines.push(new BuildingMarker(BuildingType.CoalMine, player, 3, 8, 6, 3, false, true, 4, CubeType.Coal));
-        this.coal_mines.push(new BuildingMarker(BuildingType.CoalMine, player, 3, 8, 6, 3, false, true, 4, CubeType.Coal));
-        this.coal_mines.push(new BuildingMarker(BuildingType.CoalMine, player, 4, 10, 5, 4, false, true, 5, CubeType.Coal));
-        this.coal_mines.push(new BuildingMarker(BuildingType.CoalMine, player, 4, 10, 5, 4, false, true, 5, CubeType.Coal));
+        this.coal_mines.push(new BuildingCounter(BuildingType.CoalMine, player, 1, 5, 4, 1, false, false, 2, CubeType.Coal));
+        this.coal_mines.push(new BuildingCounter(BuildingType.CoalMine, player, 2, 7, 7, 2, false, false, 3, CubeType.Coal));
+        this.coal_mines.push(new BuildingCounter(BuildingType.CoalMine, player, 2, 7, 7, 2, false, false, 3, CubeType.Coal));
+        this.coal_mines.push(new BuildingCounter(BuildingType.CoalMine, player, 3, 8, 6, 3, false, true, 4, CubeType.Coal));
+        this.coal_mines.push(new BuildingCounter(BuildingType.CoalMine, player, 3, 8, 6, 3, false, true, 4, CubeType.Coal));
+        this.coal_mines.push(new BuildingCounter(BuildingType.CoalMine, player, 4, 10, 5, 4, false, true, 5, CubeType.Coal));
+        this.coal_mines.push(new BuildingCounter(BuildingType.CoalMine, player, 4, 10, 5, 4, false, true, 5, CubeType.Coal));
 
         this.ironworks = [];
-        this.ironworks.push(new BuildingMarker(BuildingType.Ironworks, player, 1, 5, 3, 3, true, false, 4, CubeType.Iron));
-        this.ironworks.push(new BuildingMarker(BuildingType.Ironworks, player, 2, 7, 3, 5, true, false, 4, CubeType.Iron));
-        this.ironworks.push(new BuildingMarker(BuildingType.Ironworks, player, 3, 9, 2, 7, true, false, 5, CubeType.Iron));
-        this.ironworks.push(new BuildingMarker(BuildingType.Ironworks, player, 4, 12, 1, 9, true, false, 6, CubeType.Iron));
+        this.ironworks.push(new BuildingCounter(BuildingType.Ironworks, player, 1, 5, 3, 3, true, false, 4, CubeType.Iron));
+        this.ironworks.push(new BuildingCounter(BuildingType.Ironworks, player, 2, 7, 3, 5, true, false, 4, CubeType.Iron));
+        this.ironworks.push(new BuildingCounter(BuildingType.Ironworks, player, 3, 9, 2, 7, true, false, 5, CubeType.Iron));
+        this.ironworks.push(new BuildingCounter(BuildingType.Ironworks, player, 4, 12, 1, 9, true, false, 6, CubeType.Iron));
 
         this.shipyards = [];
-        this.shipyards.push(new BuildingMarker(BuildingType.Shipyard, player, 0, 9999, 0, 0, false, false));
-        this.shipyards.push(new BuildingMarker(BuildingType.Shipyard, player, 0, 9999, 0, 0, false, false));
-        this.shipyards.push(new BuildingMarker(BuildingType.Shipyard, player, 1, 16, 2, 10, true, true));
-        this.shipyards.push(new BuildingMarker(BuildingType.Shipyard, player, 1, 16, 2, 10, true, true));
-        this.shipyards.push(new BuildingMarker(BuildingType.Shipyard, player, 2, 25, 1, 18, true, true));
-        this.shipyards.push(new BuildingMarker(BuildingType.Shipyard, player, 2, 25, 1, 18, true, true));
+        this.shipyards.push(new BuildingCounter(BuildingType.Shipyard, player, 0, 9999, 0, 0, false, false));
+        this.shipyards.push(new BuildingCounter(BuildingType.Shipyard, player, 0, 9999, 0, 0, false, false));
+        this.shipyards.push(new BuildingCounter(BuildingType.Shipyard, player, 1, 16, 2, 10, true, true));
+        this.shipyards.push(new BuildingCounter(BuildingType.Shipyard, player, 1, 16, 2, 10, true, true));
+        this.shipyards.push(new BuildingCounter(BuildingType.Shipyard, player, 2, 25, 1, 18, true, true));
+        this.shipyards.push(new BuildingCounter(BuildingType.Shipyard, player, 2, 25, 1, 18, true, true));
 
     }
 
-    get_collection_from_building_type(building_type: BuildingType): Array<BuildingMarker> {
+    get_collection_from_building_type(building_type: BuildingType): Array<BuildingCounter> {
         switch (building_type) {
             case BuildingType.CoalMine:
                 return this.coal_mines;
@@ -158,11 +158,11 @@ export class BuildingMarkerStock {
         }
     }
 
-    pop_building_tile(building_type: BuildingType): BuildingMarker | undefined {
+    pop_building_tile(building_type: BuildingType): BuildingCounter | undefined {
         return this.get_collection_from_building_type(building_type).shift();
     }
 
-    peek_building_tile(building_type: BuildingType): BuildingMarker | undefined {
+    peek_building_tile(building_type: BuildingType): BuildingCounter | undefined {
         return this.get_collection_from_building_type(building_type)[0];
     }
 }
@@ -185,8 +185,8 @@ export class Player {
     victory_points: number;
     income_spot: number;
     hand: Card[];
-    building_marker_stock: BuildingMarkerStock;
-    route_marker_stock: number;
+    building_counter_stock: BuildingCounterStock;
+    link_counter_stock: number;
 
     constructor(id: number, name: string, color: string) {
         this.id = id;
@@ -196,8 +196,8 @@ export class Player {
         this.victory_points = 0;
         this.income_spot = 10;
         this.hand = [];
-        this.building_marker_stock = new BuildingMarkerStock(id);
-        this.route_marker_stock = 15;
+        this.building_counter_stock = new BuildingCounterStock(id);
+        this.link_counter_stock = 15;
     }
 }
 
@@ -266,11 +266,11 @@ export class GameMap {
         ]
     }
 
-    set_building_marker(building_coordinates: Coordinates, building_marker: BuildingMarker, coal_coordinates: Coordinates | "market" | "none", inron_coordinates: Coordinates | "market" | "none") {
+    set_building_counter(building_coordinates: Coordinates, building_counter: BuildingCounter, coal_coordinates: Coordinates | "market" | "none", inron_coordinates: Coordinates | "market" | "none") {
         if (coal_coordinates == "market") {
             // trouver un chemin jusqu'à un port
         }
-        this.towns[building_coordinates.town_name].places[building_coordinates.construction_place_index].set_building_marker(building_marker);
+        this.towns[building_coordinates.town_name].places[building_coordinates.construction_place_index].set_building_counter(building_counter);
     }
 }
 
@@ -315,14 +315,14 @@ export interface Canal {
 
 export class ConstructionPlace {
     accepted_building_types: BuildingType[];
-    building_marker?: BuildingMarker;
+    building_counter?: BuildingCounter;
 
     constructor(accepted_building_types: BuildingType[]) {
         this.accepted_building_types = accepted_building_types;
     }
 
-    set_building_marker(building_marker: BuildingMarker) {
-        this.building_marker = building_marker;
+    set_building_counter(building_counter: BuildingCounter) {
+        this.building_counter = building_counter;
     }
 }
 
@@ -334,7 +334,7 @@ export function build_possibilities_for_location(location, player, game) {
     }
 
     let free_buildings = [];
-    for (const place of town.places.filter((place) => place.marker === undefined)) {
+    for (const place of town.places.filter((place) => place.counter === undefined)) {
         switch (place.type) {
             case "cotton_mill_or_coal_mine":
                 free_buildings.push("cotton_mill");
