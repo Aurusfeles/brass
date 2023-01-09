@@ -16,6 +16,30 @@ export enum CardType {
     Building = "building"
 }
 
+export class RessourceMarket {
+    spot: number;
+    values: Array<number>;
+    constructor() {
+        this.spot = 0;
+        this.values = [1, 1, 2, 2, 3, 3, 4, 4];
+    }
+
+    pop() {
+        if (this.spot < 7) {
+            this.spot = this.spot + 1;
+            return this.values[this.spot - 1];
+        }
+        return 5;
+    }
+
+    push() {
+        if (this.spot > 0) {
+            this.spot = this.spot - 1;
+            return this.values[this.spot];
+        }
+    }
+}
+
 export enum TownName {
     BarrowInFurness = "barrow_in_furness",
     Birkenhead = "birkenhead",
@@ -187,12 +211,14 @@ export class Player {
     hand: Card[];
     building_counter_stock: BuildingCounterStock;
     link_counter_stock: number;
+    spent_money: number;
 
     constructor(id: number, name: string, color: string) {
         this.id = id;
         this.name = name;
         this.color = color;
         this.money = 30;
+        this.spent_money = 0;
         this.victory_points = 0;
         this.income_spot = 10;
         this.hand = [];
@@ -274,6 +300,23 @@ export class GameMap {
     }
 }
 
+export function MakeActionBuildIndustry(game: Game, player_index: number, action: ActionBuildIndustry) {
+    let player = game.players[player_index];
+    let industry = player.building_counter_stock.pop_building_tile(action.building);
+    if (industry === undefined) {
+        return;
+    }
+    let total_cost = industry.cost;
+    if (action.coal_source == "market") {
+        total_cost += game.coal_market.pop();
+    }
+    if (action.iron_source == "market") {
+        total_cost += game.iron_market.pop();
+    }
+    player.money -= total_cost;
+    player.spent_money += total_cost;
+}
+
 export interface ActionBuildIndustry {
     building: BuildingType,
     town: TownName,
@@ -310,8 +353,8 @@ export interface Coordinates {
 export class Game {
     players: Player[];
     map: GameMap;
-    coal_demand_spot: number;
-    iron_demand_spot: number;
+    coal_market: RessourceMarket;
+    iron_market: RessourceMarket;
     cotton_market_spot: number;
     player_order: number[];
     era: Era;
@@ -321,8 +364,8 @@ export class Game {
     constructor() {
         this.players = [];
         this.map = new GameMap();
-        this.coal_demand_spot = 7;
-        this.iron_demand_spot = 7;
+        this.coal_market = new RessourceMarket();
+        this.iron_market = new RessourceMarket();
         this.cotton_market_spot = 5;
         this.player_order = [];
         this.era = Era.Canals;
