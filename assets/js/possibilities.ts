@@ -274,6 +274,34 @@ export class GameMap {
     }
 }
 
+export interface ActionBuildIndustry {
+    building: BuildingType,
+    town: TownName,
+    coordinates: Coordinates,
+    coal_source: Coordinates | "market" | undefined,
+    iron_source: Coordinates | "market" | undefined
+}
+
+export interface ActionBuilLink {
+    link_index: number,
+    second_build: number,
+    coal_source: Coordinates | undefined
+}
+
+export interface ActionLoan {
+    level: number
+}
+
+export interface ActionDevelopment {
+    building: BuildingType,
+    iron_source: Coordinates | "market" | undefined
+}
+
+export interface ActionSellCotton {
+    cotton_mill: Coordinates,
+    port: Coordinates | "market" | undefined
+}
+
 export interface Coordinates {
     town_name: TownName,
     construction_place_index: number
