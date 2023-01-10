@@ -7,7 +7,7 @@
         :key="index"
         @click="card_click(card)"
       >
-        {{ card.type == "location" ? card.location : card.building }}
+        {{ card.type == "location" ? card.location : card.industry }}
       </div>
     </div>
     <div class="possibilities">

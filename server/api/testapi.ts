@@ -16,7 +16,7 @@ export default defineEventHandler(async function (event) {
             },
             me: {
                 money: 21,
-                counters: {
+                tiles: {
                     coal_mines: 5,
                     ironworks: 3,
                     ports: 6,
@@ -41,7 +41,7 @@ export default defineEventHandler(async function (event) {
                     cards: 8,
                     points: 10,
                     income: 20,
-                    counters: {
+                    tiles: {
                         coal_mines: 5,
                         ironworks: 3,
                         ports: 6,

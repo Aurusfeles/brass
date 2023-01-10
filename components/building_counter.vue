@@ -21,7 +21,7 @@ const { players } = useGameStore();
 
 const props = defineProps({
   info: {
-    type: possibilities.BuildingCounter,
+    type: possibilities.IndustryTile,
     required: true,
   },
 });
