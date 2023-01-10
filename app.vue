@@ -15,7 +15,7 @@
     </div>
     
     <MyHand :content="my_cards" />-->
-    <CounterStock :player_index="0" />
+    <TileStock :player_index="0" />
   </div>
 </template>
 

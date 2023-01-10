@@ -2,10 +2,10 @@
   <div class="place">
     <div :class="first_image_class"></div>
     <div v-if="is_multi" :class="second_image_class"></div>
-    <BuildingCounter
-      class="counter"
-      v-if="info.building_counter !== undefined"
-      :info="info.building_counter"
+    <IndustryTile
+      class="tile"
+      v-if="info.industry_tile !== undefined"
+      :info="info.industry_tile"
     />
   </div>
 </template>
@@ -21,12 +21,12 @@ const props = defineProps({
 });
 
 const is_multi = computed(() => {
-  return props.info.accepted_building_types.length == 2;
+  return props.info.accepted_industry_types.length == 2;
 });
 
 const first_image_class = computed(() => {
   let image_class = "image ";
-  image_class += props.info.accepted_building_types[0];
+  image_class += props.info.accepted_industry_types[0];
   if (is_multi.value) {
     image_class += " half";
   }
@@ -35,14 +35,14 @@ const first_image_class = computed(() => {
 
 const second_image_class = computed(() => {
   let image_class = "image half bottom_right ";
-  image_class += props.info.accepted_building_types[1];
+  image_class += props.info.accepted_industry_types[1];
   return image_class;
 });
 </script>
 
 
 <style>
-.counter {
+.tile {
   position: absolute;
   width: 33px;
   height: 33px;

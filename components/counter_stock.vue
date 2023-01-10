@@ -1,17 +1,13 @@
 <template>
-  <div class="building_counter_stock">
+  <div class="industry_tile_stock">
     <div
       class="category"
-      v-for="(category, category_key) in building_counter_stock"
+      v-for="(category, category_key) in industry_tile_stock"
       :key="category_key"
     >
-      <BuildingCounter
-        v-for="(counter, index) in category"
-        :key="index"
-        :info="counter"
-      >
-        {{ counter }}
-      </BuildingCounter>
+      <IndustryTile v-for="(tile, index) in category" :key="index" :info="tile">
+        {{ tile }}
+      </IndustryTile>
     </div>
   </div>
 
@@ -29,17 +25,17 @@ const props = defineProps({
   },
 });
 
-const building_counter_stock = computed(() => {
-  return players[props.player_index].building_counter_stock;
+const industry_tile_stock = computed(() => {
+  return players[props.player_index].industry_tile_stock;
 });
 
-const link_counter_stock = computed(() => {
-  return players[props.player_index].link_counter_stock;
+const link_tile_stock = computed(() => {
+  return players[props.player_index].link_tile_stock;
 });
 </script>
 
 <style>
-.building_counter_stock {
+.industry_tile_stock {
   display: flex;
   max-width: 180px;
 }

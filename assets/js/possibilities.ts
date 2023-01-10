@@ -1,4 +1,4 @@
-export enum BuildingType {
+export enum IndustryType {
     CottonMill = "cotton_mill",
     CoalMine = "coal_mine",
     Ironworks = "ironworks",
@@ -13,7 +13,7 @@ export enum CubeType {
 
 export enum CardType {
     Location = "location",
-    Building = "building"
+    Industry = "industry"
 }
 
 export class RessourceMarket {
@@ -72,12 +72,12 @@ export enum TownName {
 export interface Card {
     type: CardType,
     location?: string,
-    building?: BuildingType
+    industry?: IndustryType
 }
 
 
-export class BuildingCounter {
-    type: BuildingType;
+export class IndustryTile {
+    type: IndustryType;
     player: number;
     level: number;
     cost: number;
@@ -90,7 +90,7 @@ export class BuildingCounter {
     cube_type?: CubeType;
     cube_quantity?: number;
 
-    constructor(type: BuildingType, player: number, level: number, cost: number, income: number, victory_points: number, needs_coal: boolean, needs_iron: boolean, cube_production?: number, cube_type?: CubeType) {
+    constructor(type: IndustryType, player: number, level: number, cost: number, income: number, victory_points: number, needs_coal: boolean, needs_iron: boolean, cube_production?: number, cube_type?: CubeType) {
         this.type = type;
         this.player = player;
         this.level = level;
@@ -111,83 +111,83 @@ export class BuildingCounter {
 }
 
 
-export class BuildingCounterStock {
-    ports: BuildingCounter[];
-    cotton_mills: BuildingCounter[];
-    ironworks: BuildingCounter[];
-    shipyards: BuildingCounter[];
-    coal_mines: BuildingCounter[];
+export class IndustryTileStock {
+    ports: IndustryTile[];
+    cotton_mills: IndustryTile[];
+    ironworks: IndustryTile[];
+    shipyards: IndustryTile[];
+    coal_mines: IndustryTile[];
 
     constructor(player: number) {
         this.ports = [];
-        this.ports.push(new BuildingCounter(BuildingType.Port, player, 1, 6, 3, 2, false, false));
-        this.ports.push(new BuildingCounter(BuildingType.Port, player, 1, 6, 3, 2, false, false));
-        this.ports.push(new BuildingCounter(BuildingType.Port, player, 2, 7, 3, 4, false, false));
-        this.ports.push(new BuildingCounter(BuildingType.Port, player, 2, 7, 3, 4, false, false));
-        this.ports.push(new BuildingCounter(BuildingType.Port, player, 3, 8, 4, 6, false, false));
-        this.ports.push(new BuildingCounter(BuildingType.Port, player, 3, 8, 4, 6, false, false));
-        this.ports.push(new BuildingCounter(BuildingType.Port, player, 4, 9, 4, 9, false, false));
+        this.ports.push(new IndustryTile(IndustryType.Port, player, 1, 6, 3, 2, false, false));
+        this.ports.push(new IndustryTile(IndustryType.Port, player, 1, 6, 3, 2, false, false));
+        this.ports.push(new IndustryTile(IndustryType.Port, player, 2, 7, 3, 4, false, false));
+        this.ports.push(new IndustryTile(IndustryType.Port, player, 2, 7, 3, 4, false, false));
+        this.ports.push(new IndustryTile(IndustryType.Port, player, 3, 8, 4, 6, false, false));
+        this.ports.push(new IndustryTile(IndustryType.Port, player, 3, 8, 4, 6, false, false));
+        this.ports.push(new IndustryTile(IndustryType.Port, player, 4, 9, 4, 9, false, false));
 
         this.cotton_mills = [];
-        this.cotton_mills.push(new BuildingCounter(BuildingType.CottonMill, player, 1, 12, 5, 3, false, false));
-        this.cotton_mills.push(new BuildingCounter(BuildingType.CottonMill, player, 1, 12, 5, 3, false, false));
-        this.cotton_mills.push(new BuildingCounter(BuildingType.CottonMill, player, 1, 12, 5, 3, false, false));
-        this.cotton_mills.push(new BuildingCounter(BuildingType.CottonMill, player, 2, 14, 4, 5, true, false));
-        this.cotton_mills.push(new BuildingCounter(BuildingType.CottonMill, player, 2, 14, 4, 5, true, false));
-        this.cotton_mills.push(new BuildingCounter(BuildingType.CottonMill, player, 2, 14, 4, 5, true, false));
-        this.cotton_mills.push(new BuildingCounter(BuildingType.CottonMill, player, 3, 16, 3, 9, true, true));
-        this.cotton_mills.push(new BuildingCounter(BuildingType.CottonMill, player, 3, 16, 3, 9, true, true));
-        this.cotton_mills.push(new BuildingCounter(BuildingType.CottonMill, player, 3, 16, 3, 9, true, true));
-        this.cotton_mills.push(new BuildingCounter(BuildingType.CottonMill, player, 3, 18, 2, 12, true, true));
-        this.cotton_mills.push(new BuildingCounter(BuildingType.CottonMill, player, 3, 18, 2, 12, true, true));
-        this.cotton_mills.push(new BuildingCounter(BuildingType.CottonMill, player, 3, 18, 2, 12, true, true));
+        this.cotton_mills.push(new IndustryTile(IndustryType.CottonMill, player, 1, 12, 5, 3, false, false));
+        this.cotton_mills.push(new IndustryTile(IndustryType.CottonMill, player, 1, 12, 5, 3, false, false));
+        this.cotton_mills.push(new IndustryTile(IndustryType.CottonMill, player, 1, 12, 5, 3, false, false));
+        this.cotton_mills.push(new IndustryTile(IndustryType.CottonMill, player, 2, 14, 4, 5, true, false));
+        this.cotton_mills.push(new IndustryTile(IndustryType.CottonMill, player, 2, 14, 4, 5, true, false));
+        this.cotton_mills.push(new IndustryTile(IndustryType.CottonMill, player, 2, 14, 4, 5, true, false));
+        this.cotton_mills.push(new IndustryTile(IndustryType.CottonMill, player, 3, 16, 3, 9, true, true));
+        this.cotton_mills.push(new IndustryTile(IndustryType.CottonMill, player, 3, 16, 3, 9, true, true));
+        this.cotton_mills.push(new IndustryTile(IndustryType.CottonMill, player, 3, 16, 3, 9, true, true));
+        this.cotton_mills.push(new IndustryTile(IndustryType.CottonMill, player, 3, 18, 2, 12, true, true));
+        this.cotton_mills.push(new IndustryTile(IndustryType.CottonMill, player, 3, 18, 2, 12, true, true));
+        this.cotton_mills.push(new IndustryTile(IndustryType.CottonMill, player, 3, 18, 2, 12, true, true));
 
         this.coal_mines = [];
-        this.coal_mines.push(new BuildingCounter(BuildingType.CoalMine, player, 1, 5, 4, 1, false, false, 2, CubeType.Coal));
-        this.coal_mines.push(new BuildingCounter(BuildingType.CoalMine, player, 2, 7, 7, 2, false, false, 3, CubeType.Coal));
-        this.coal_mines.push(new BuildingCounter(BuildingType.CoalMine, player, 2, 7, 7, 2, false, false, 3, CubeType.Coal));
-        this.coal_mines.push(new BuildingCounter(BuildingType.CoalMine, player, 3, 8, 6, 3, false, true, 4, CubeType.Coal));
-        this.coal_mines.push(new BuildingCounter(BuildingType.CoalMine, player, 3, 8, 6, 3, false, true, 4, CubeType.Coal));
-        this.coal_mines.push(new BuildingCounter(BuildingType.CoalMine, player, 4, 10, 5, 4, false, true, 5, CubeType.Coal));
-        this.coal_mines.push(new BuildingCounter(BuildingType.CoalMine, player, 4, 10, 5, 4, false, true, 5, CubeType.Coal));
+        this.coal_mines.push(new IndustryTile(IndustryType.CoalMine, player, 1, 5, 4, 1, false, false, 2, CubeType.Coal));
+        this.coal_mines.push(new IndustryTile(IndustryType.CoalMine, player, 2, 7, 7, 2, false, false, 3, CubeType.Coal));
+        this.coal_mines.push(new IndustryTile(IndustryType.CoalMine, player, 2, 7, 7, 2, false, false, 3, CubeType.Coal));
+        this.coal_mines.push(new IndustryTile(IndustryType.CoalMine, player, 3, 8, 6, 3, false, true, 4, CubeType.Coal));
+        this.coal_mines.push(new IndustryTile(IndustryType.CoalMine, player, 3, 8, 6, 3, false, true, 4, CubeType.Coal));
+        this.coal_mines.push(new IndustryTile(IndustryType.CoalMine, player, 4, 10, 5, 4, false, true, 5, CubeType.Coal));
+        this.coal_mines.push(new IndustryTile(IndustryType.CoalMine, player, 4, 10, 5, 4, false, true, 5, CubeType.Coal));
 
         this.ironworks = [];
-        this.ironworks.push(new BuildingCounter(BuildingType.Ironworks, player, 1, 5, 3, 3, true, false, 4, CubeType.Iron));
-        this.ironworks.push(new BuildingCounter(BuildingType.Ironworks, player, 2, 7, 3, 5, true, false, 4, CubeType.Iron));
-        this.ironworks.push(new BuildingCounter(BuildingType.Ironworks, player, 3, 9, 2, 7, true, false, 5, CubeType.Iron));
-        this.ironworks.push(new BuildingCounter(BuildingType.Ironworks, player, 4, 12, 1, 9, true, false, 6, CubeType.Iron));
+        this.ironworks.push(new IndustryTile(IndustryType.Ironworks, player, 1, 5, 3, 3, true, false, 4, CubeType.Iron));
+        this.ironworks.push(new IndustryTile(IndustryType.Ironworks, player, 2, 7, 3, 5, true, false, 4, CubeType.Iron));
+        this.ironworks.push(new IndustryTile(IndustryType.Ironworks, player, 3, 9, 2, 7, true, false, 5, CubeType.Iron));
+        this.ironworks.push(new IndustryTile(IndustryType.Ironworks, player, 4, 12, 1, 9, true, false, 6, CubeType.Iron));
 
         this.shipyards = [];
-        this.shipyards.push(new BuildingCounter(BuildingType.Shipyard, player, 0, 9999, 0, 0, false, false));
-        this.shipyards.push(new BuildingCounter(BuildingType.Shipyard, player, 0, 9999, 0, 0, false, false));
-        this.shipyards.push(new BuildingCounter(BuildingType.Shipyard, player, 1, 16, 2, 10, true, true));
-        this.shipyards.push(new BuildingCounter(BuildingType.Shipyard, player, 1, 16, 2, 10, true, true));
-        this.shipyards.push(new BuildingCounter(BuildingType.Shipyard, player, 2, 25, 1, 18, true, true));
-        this.shipyards.push(new BuildingCounter(BuildingType.Shipyard, player, 2, 25, 1, 18, true, true));
+        this.shipyards.push(new IndustryTile(IndustryType.Shipyard, player, 0, 9999, 0, 0, false, false));
+        this.shipyards.push(new IndustryTile(IndustryType.Shipyard, player, 0, 9999, 0, 0, false, false));
+        this.shipyards.push(new IndustryTile(IndustryType.Shipyard, player, 1, 16, 2, 10, true, true));
+        this.shipyards.push(new IndustryTile(IndustryType.Shipyard, player, 1, 16, 2, 10, true, true));
+        this.shipyards.push(new IndustryTile(IndustryType.Shipyard, player, 2, 25, 1, 18, true, true));
+        this.shipyards.push(new IndustryTile(IndustryType.Shipyard, player, 2, 25, 1, 18, true, true));
 
     }
 
-    get_collection_from_building_type(building_type: BuildingType): Array<BuildingCounter> {
-        switch (building_type) {
-            case BuildingType.CoalMine:
+    get_collection_from_industry_type(industry_type: IndustryType): Array<IndustryTile> {
+        switch (industry_type) {
+            case IndustryType.CoalMine:
                 return this.coal_mines;
-            case BuildingType.CottonMill:
+            case IndustryType.CottonMill:
                 return this.cotton_mills;
-            case BuildingType.Ironworks:
+            case IndustryType.Ironworks:
                 return this.ironworks;
-            case BuildingType.Port:
+            case IndustryType.Port:
                 return this.ports;
-            case BuildingType.Shipyard:
+            case IndustryType.Shipyard:
                 return this.shipyards;
         }
     }
 
-    pop_building_tile(building_type: BuildingType): BuildingCounter | undefined {
-        return this.get_collection_from_building_type(building_type).shift();
+    pop_industry_tile(industry_type: IndustryType): IndustryTile | undefined {
+        return this.get_collection_from_industry_type(industry_type).shift();
     }
 
-    peek_building_tile(building_type: BuildingType): BuildingCounter | undefined {
-        return this.get_collection_from_building_type(building_type)[0];
+    peek_industry_tile(industry_type: IndustryType): IndustryTile | undefined {
+        return this.get_collection_from_industry_type(industry_type)[0];
     }
 }
 
@@ -209,8 +209,8 @@ export class Player {
     victory_points: number;
     income_spot: number;
     hand: Card[];
-    building_counter_stock: BuildingCounterStock;
-    link_counter_stock: number;
+    industry_tile_stock: IndustryTileStock;
+    link_tile_stock: number;
     spent_money: number;
 
     constructor(id: number, name: string, color: string) {
@@ -222,8 +222,8 @@ export class Player {
         this.victory_points = 0;
         this.income_spot = 10;
         this.hand = [];
-        this.building_counter_stock = new BuildingCounterStock(id);
-        this.link_counter_stock = 15;
+        this.industry_tile_stock = new IndustryTileStock(id);
+        this.link_tile_stock = 15;
     }
 }
 
@@ -238,30 +238,30 @@ export class GameMap {
 
     constructor() {
         this.towns = {
-            [TownName.BarrowInFurness]: new Town("Barrow-in-Furness", [new ConstructionPlace([BuildingType.Shipyard]), new ConstructionPlace([BuildingType.Ironworks])]),
-            [TownName.Birkenhead]: new Town("Birkenhead", [new ConstructionPlace([BuildingType.Shipyard])]),
-            [TownName.Blackburn]: new Town("Blackburn", [new ConstructionPlace([BuildingType.CottonMill, BuildingType.CoalMine]), new ConstructionPlace([BuildingType.CottonMill, BuildingType.CoalMine]), new ConstructionPlace([BuildingType.Ironworks])]),
+            [TownName.BarrowInFurness]: new Town("Barrow-in-Furness", [new ConstructionPlace([IndustryType.Shipyard]), new ConstructionPlace([IndustryType.Ironworks])]),
+            [TownName.Birkenhead]: new Town("Birkenhead", [new ConstructionPlace([IndustryType.Shipyard])]),
+            [TownName.Blackburn]: new Town("Blackburn", [new ConstructionPlace([IndustryType.CottonMill, IndustryType.CoalMine]), new ConstructionPlace([IndustryType.CottonMill, IndustryType.CoalMine]), new ConstructionPlace([IndustryType.Ironworks])]),
             [TownName.Blackpool]: new Town("Blackpool", []),
-            [TownName.Bolton]: new Town("Bolton", [new ConstructionPlace([BuildingType.CottonMill, BuildingType.CoalMine]), new ConstructionPlace([BuildingType.CottonMill, BuildingType.CoalMine]), new ConstructionPlace([BuildingType.Ironworks])]),
-            [TownName.Burnley]: new Town("Burnley", [new ConstructionPlace([BuildingType.CottonMill, BuildingType.CoalMine]), new ConstructionPlace([BuildingType.CottonMill, BuildingType.CoalMine])]),
-            [TownName.Bury]: new Town("Bury", [new ConstructionPlace([BuildingType.CottonMill, BuildingType.CoalMine]), new ConstructionPlace([BuildingType.CottonMill, BuildingType.CoalMine])]),
-            [TownName.Colne]: new Town("Colne", [new ConstructionPlace([BuildingType.CottonMill]), new ConstructionPlace([BuildingType.CottonMill])]),
-            [TownName.EllesmerePort]: new Town("Ellesmere Port", [new ConstructionPlace([BuildingType.Port])]),
-            [TownName.Fleetwood]: new Town("Fleetwood", [new ConstructionPlace([BuildingType.Port])]),
-            [TownName.Lancaster]: new Town("Lancaster", [new ConstructionPlace([BuildingType.Port]), new ConstructionPlace([BuildingType.CottonMill, BuildingType.Port])]),
-            [TownName.Liverpool]: new Town("Liverpool", [new ConstructionPlace([BuildingType.Port]), new ConstructionPlace([BuildingType.Port]), new ConstructionPlace([BuildingType.Shipyard]), new ConstructionPlace([BuildingType.Port])]),
-            [TownName.Macclesfield]: new Town("Macclesfield", [new ConstructionPlace([BuildingType.CottonMill]), new ConstructionPlace([BuildingType.CottonMill])]),
-            [TownName.Manchester]: new Town("Manchester", [new ConstructionPlace([BuildingType.CottonMill, BuildingType.CoalMine]), new ConstructionPlace([BuildingType.CottonMill, BuildingType.CoalMine]), new ConstructionPlace([BuildingType.CottonMill, BuildingType.CoalMine]), new ConstructionPlace([BuildingType.Ironworks])]),
+            [TownName.Bolton]: new Town("Bolton", [new ConstructionPlace([IndustryType.CottonMill, IndustryType.CoalMine]), new ConstructionPlace([IndustryType.CottonMill, IndustryType.CoalMine]), new ConstructionPlace([IndustryType.Ironworks])]),
+            [TownName.Burnley]: new Town("Burnley", [new ConstructionPlace([IndustryType.CottonMill, IndustryType.CoalMine]), new ConstructionPlace([IndustryType.CottonMill, IndustryType.CoalMine])]),
+            [TownName.Bury]: new Town("Bury", [new ConstructionPlace([IndustryType.CottonMill, IndustryType.CoalMine]), new ConstructionPlace([IndustryType.CottonMill, IndustryType.CoalMine])]),
+            [TownName.Colne]: new Town("Colne", [new ConstructionPlace([IndustryType.CottonMill]), new ConstructionPlace([IndustryType.CottonMill])]),
+            [TownName.EllesmerePort]: new Town("Ellesmere Port", [new ConstructionPlace([IndustryType.Port])]),
+            [TownName.Fleetwood]: new Town("Fleetwood", [new ConstructionPlace([IndustryType.Port])]),
+            [TownName.Lancaster]: new Town("Lancaster", [new ConstructionPlace([IndustryType.Port]), new ConstructionPlace([IndustryType.CottonMill, IndustryType.Port])]),
+            [TownName.Liverpool]: new Town("Liverpool", [new ConstructionPlace([IndustryType.Port]), new ConstructionPlace([IndustryType.Port]), new ConstructionPlace([IndustryType.Shipyard]), new ConstructionPlace([IndustryType.Port])]),
+            [TownName.Macclesfield]: new Town("Macclesfield", [new ConstructionPlace([IndustryType.CottonMill]), new ConstructionPlace([IndustryType.CottonMill])]),
+            [TownName.Manchester]: new Town("Manchester", [new ConstructionPlace([IndustryType.CottonMill, IndustryType.CoalMine]), new ConstructionPlace([IndustryType.CottonMill, IndustryType.CoalMine]), new ConstructionPlace([IndustryType.CottonMill, IndustryType.CoalMine]), new ConstructionPlace([IndustryType.Ironworks])]),
             [TownName.Northwich]: new Town("Northwich", []),
-            [TownName.Oldham]: new Town("Oldham", [new ConstructionPlace([BuildingType.CottonMill, BuildingType.CoalMine]), new ConstructionPlace([BuildingType.CottonMill, BuildingType.CoalMine])]),
-            [TownName.Preston]: new Town("Preston", [new ConstructionPlace([BuildingType.Port]), new ConstructionPlace([BuildingType.CottonMill, BuildingType.Port]), new ConstructionPlace([BuildingType.Ironworks])]),
-            [TownName.Rochdale]: new Town("Rochdale", [new ConstructionPlace([BuildingType.CottonMill, BuildingType.CoalMine]), new ConstructionPlace([BuildingType.CottonMill, BuildingType.CoalMine]), new ConstructionPlace([BuildingType.Ironworks])]),
+            [TownName.Oldham]: new Town("Oldham", [new ConstructionPlace([IndustryType.CottonMill, IndustryType.CoalMine]), new ConstructionPlace([IndustryType.CottonMill, IndustryType.CoalMine])]),
+            [TownName.Preston]: new Town("Preston", [new ConstructionPlace([IndustryType.Port]), new ConstructionPlace([IndustryType.CottonMill, IndustryType.Port]), new ConstructionPlace([IndustryType.Ironworks])]),
+            [TownName.Rochdale]: new Town("Rochdale", [new ConstructionPlace([IndustryType.CottonMill, IndustryType.CoalMine]), new ConstructionPlace([IndustryType.CottonMill, IndustryType.CoalMine]), new ConstructionPlace([IndustryType.Ironworks])]),
             [TownName.Scotland]: new Town("Scotland", []),
             [TownName.Southport]: new Town("Southport", []),
-            [TownName.Stockport]: new Town("Stockport", [new ConstructionPlace([BuildingType.CottonMill]), new ConstructionPlace([BuildingType.CottonMill])]),
+            [TownName.Stockport]: new Town("Stockport", [new ConstructionPlace([IndustryType.CottonMill]), new ConstructionPlace([IndustryType.CottonMill])]),
             [TownName.TheMidlands]: new Town("The Midlands", []),
-            [TownName.WarringtonAndRuncorn]: new Town("Warrington & Runcorn", [new ConstructionPlace([BuildingType.CottonMill, BuildingType.CoalMine]), new ConstructionPlace([BuildingType.Port])]),
-            [TownName.Wigan]: new Town("Wigan", [new ConstructionPlace([BuildingType.CoalMine]), new ConstructionPlace([BuildingType.CoalMine])]),
+            [TownName.WarringtonAndRuncorn]: new Town("Warrington & Runcorn", [new ConstructionPlace([IndustryType.CottonMill, IndustryType.CoalMine]), new ConstructionPlace([IndustryType.Port])]),
+            [TownName.Wigan]: new Town("Wigan", [new ConstructionPlace([IndustryType.CoalMine]), new ConstructionPlace([IndustryType.CoalMine])]),
             [TownName.Yorkshire]: new Town("Yorkshire", []),
         };
         this.canals = [
@@ -292,17 +292,17 @@ export class GameMap {
         ]
     }
 
-    set_building_counter(building_coordinates: Coordinates, building_counter: BuildingCounter, coal_coordinates: Coordinates | "market" | "none", inron_coordinates: Coordinates | "market" | "none") {
+    set_industry_tile(industry_coordinates: Coordinates, industry_tile: IndustryTile, coal_coordinates: Coordinates | "market" | "none", inron_coordinates: Coordinates | "market" | "none") {
         if (coal_coordinates == "market") {
             // trouver un chemin jusqu'à un port
         }
-        this.towns[building_coordinates.town_name].places[building_coordinates.construction_place_index].set_building_counter(building_counter);
+        this.towns[industry_coordinates.town_name].places[industry_coordinates.construction_place_index].set_industry_tile(industry_tile);
     }
 }
 
 export function MakeActionBuildIndustry(game: Game, player_index: number, action: ActionBuildIndustry) {
     let player = game.players[player_index];
-    let industry = player.building_counter_stock.pop_building_tile(action.building);
+    let industry = player.industry_tile_stock.pop_industry_tile(action.industry);
     if (industry === undefined) {
         return;
     }
@@ -318,7 +318,7 @@ export function MakeActionBuildIndustry(game: Game, player_index: number, action
 }
 
 export interface ActionBuildIndustry {
-    building: BuildingType,
+    industry: IndustryType,
     town: TownName,
     coordinates: Coordinates,
     coal_source: Coordinates | "market" | undefined,
@@ -336,7 +336,7 @@ export interface ActionLoan {
 }
 
 export interface ActionDevelopment {
-    building: BuildingType,
+    industry: IndustryType,
     iron_source: Coordinates | "market" | undefined
 }
 
@@ -385,41 +385,41 @@ export interface Canal {
 }
 
 export class ConstructionPlace {
-    accepted_building_types: BuildingType[];
-    building_counter?: BuildingCounter;
+    accepted_industry_types: IndustryType[];
+    industry_tile?: IndustryTile;
 
-    constructor(accepted_building_types: BuildingType[]) {
-        this.accepted_building_types = accepted_building_types;
+    constructor(accepted_industry_types: IndustryType[]) {
+        this.accepted_industry_types = accepted_industry_types;
     }
 
-    set_building_counter(building_counter: BuildingCounter) {
-        this.building_counter = building_counter;
+    set_industry_tile(industry_tile: IndustryTile) {
+        this.industry_tile = industry_tile;
     }
 }
 
 /*
 export function build_possibilities_for_location(location, player, game) {
     let town = game.map.towns[location];
-    if (game.era == "canals" && town.places.find((place) => place.building !== undefined && place.building.player == player)) {
-        return "You already have a building there."
+    if (game.era == "canals" && town.places.find((place) => place.industry !== undefined && place.industry.player == player)) {
+        return "You already have a industry there."
     }
 
-    let free_buildings = [];
-    for (const place of town.places.filter((place) => place.counter === undefined)) {
+    let free_industrys = [];
+    for (const place of town.places.filter((place) => place.tile === undefined)) {
         switch (place.type) {
             case "cotton_mill_or_coal_mine":
-                free_buildings.push("cotton_mill");
-                free_buildings.push("coal_mine");
+                free_industrys.push("cotton_mill");
+                free_industrys.push("coal_mine");
                 break;
             case "cotton_mill_or_port":
-                free_buildings.push("cotton_mill");
-                free_buildings.push("port");
+                free_industrys.push("cotton_mill");
+                free_industrys.push("port");
                 break;
             case "coal_mine":
-                free_buildings.push("coal_mine");
+                free_industrys.push("coal_mine");
                 break;
             case "ironworks":
-                free_buildings.push("ironworks");
+                free_industrys.push("ironworks");
                 break;
 
         }
@@ -427,6 +427,6 @@ export function build_possibilities_for_location(location, player, game) {
 
 }
 
-export function build_possibilities_for_building(building, player, game) {
+export function build_possibilities_for_industry(industry, player, game) {
 
 }*/
