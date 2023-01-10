@@ -300,29 +300,47 @@ export class GameMap {
     }
 }
 
-export function MakeActionBuildIndustry(game: Game, player_index: number, action: ActionBuildIndustry) {
+export function MakeActionBuildIndustry(game: Game, player_index: number, action: ActionBuildIndustry): Game {
     let player = game.players[player_index];
     let industry = player.building_counter_stock.pop_building_tile(action.building);
     if (industry === undefined) {
-        return;
+        return game;
     }
     let total_cost = industry.cost;
     if (action.coal_source == "market") {
         total_cost += game.coal_market.pop();
     }
+    else if (action.coal_source !== undefined) {
+        let coal_industry = game.map.towns[action.coal_source.town_name].places[action.coal_source.construction_place_index].building_counter;
+        if (coal_industry !== undefined && coal_industry.cube_quantity !== undefined) {
+            coal_industry.cube_quantity -= 1;
+        }
+    }
+
     if (action.iron_source == "market") {
         total_cost += game.iron_market.pop();
     }
+    else if (action.iron_source !== undefined) {
+        let iron_industry = game.map.towns[action.iron_source.town_name].places[action.iron_source.construction_place_index].building_counter;
+        if (iron_industry !== undefined && iron_industry.cube_quantity !== undefined) {
+            iron_industry.cube_quantity -= 1;
+        }
+    }
+
+    /// A FAIRE: tester le raccordement à un port, et voir s'il faut vider des cubes sur le marcher
+
+    game.map.towns[action.coordinates.town_name].places[action.coordinates.construction_place_index].building_counter = industry;
+
     player.money -= total_cost;
     player.spent_money += total_cost;
+    return game;
 }
 
 export interface ActionBuildIndustry {
     building: BuildingType,
-    town: TownName,
     coordinates: Coordinates,
-    coal_source: Coordinates | "market" | undefined,
-    iron_source: Coordinates | "market" | undefined
+    coal_source?: Coordinates | "market",
+    iron_source?: Coordinates | "market"
 }
 
 export interface ActionBuilLink {

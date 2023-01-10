@@ -7,21 +7,8 @@ export const useGameStore = defineStore('game', {
         let game = new possibilities.Game();
         game.add_player("Aurus", "#FFAAAA");
         game.add_player("Bob", "#AAFFAA");
-        let coal_mine = game.players[0].building_counter_stock.pop_building_tile(
-            possibilities.BuildingType.CoalMine
-        );
-        if (coal_mine !== undefined) {
-            game.map.set_building_counter(
-                {
-                    town_name: possibilities.TownName.Bolton,
-                    construction_place_index: 0,
-                },
-
-                coal_mine,
-                "none",
-                "none"
-            );
-        }
+        game = possibilities.MakeActionBuildIndustry(game, 0, { building: possibilities.BuildingType.CoalMine, coordinates: { town_name: possibilities.TownName.Wigan, construction_place_index: 0 } });// );
+        game = possibilities.MakeActionBuildIndustry(game, 1, { building: possibilities.BuildingType.Ironworks, coordinates: { town_name: possibilities.TownName.Preston, construction_place_index: 0 }, coal_source: { town_name: possibilities.TownName.Wigan, construction_place_index: 0 } });// );
         return { ...game };
 
     }
