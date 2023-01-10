@@ -300,7 +300,7 @@ export class GameMap {
     }
 }
 
-export function MakeActionBuildIndustry(game: Game, player_index: number, action: ActionBuildIndustry): Game {
+export function make_action_build_industry(game: Game, player_index: number, action: ActionBuildIndustry): Game {
     let player = game.players[player_index];
     let industry = player.industry_tile_stock.pop_industry_tile(action.industry);
     if (industry === undefined) {
@@ -311,7 +311,7 @@ export function MakeActionBuildIndustry(game: Game, player_index: number, action
         total_cost += game.coal_market.pop();
     }
     else if (action.coal_source !== undefined) {
-        let coal_industry = game.map.towns[action.coal_source.town_name].places[action.coal_source.construction_place_index].building_counter;
+        let coal_industry = game.map.towns[action.coal_source.town_name].places[action.coal_source.construction_place_index].industry_tile;
         if (coal_industry !== undefined && coal_industry.cube_quantity !== undefined) {
             coal_industry.cube_quantity -= 1;
         }
@@ -321,7 +321,7 @@ export function MakeActionBuildIndustry(game: Game, player_index: number, action
         total_cost += game.iron_market.pop();
     }
     else if (action.iron_source !== undefined) {
-        let iron_industry = game.map.towns[action.iron_source.town_name].places[action.iron_source.construction_place_index].building_counter;
+        let iron_industry = game.map.towns[action.iron_source.town_name].places[action.iron_source.construction_place_index].industry_tile;
         if (iron_industry !== undefined && iron_industry.cube_quantity !== undefined) {
             iron_industry.cube_quantity -= 1;
         }
@@ -329,7 +329,7 @@ export function MakeActionBuildIndustry(game: Game, player_index: number, action
 
     /// A FAIRE: tester le raccordement à un port, et voir s'il faut vider des cubes sur le marcher
 
-    game.map.towns[action.coordinates.town_name].places[action.coordinates.construction_place_index].building_counter = industry;
+    game.map.towns[action.coordinates.town_name].places[action.coordinates.construction_place_index].industry_tile = industry;
 
     player.money -= total_cost;
     player.spent_money += total_cost;
@@ -338,13 +338,12 @@ export function MakeActionBuildIndustry(game: Game, player_index: number, action
 
 export interface ActionBuildIndustry {
     industry: IndustryType,
-    town: TownName,
     coordinates: Coordinates,
     coal_source?: Coordinates | "market",
     iron_source?: Coordinates | "market"
 }
 
-export interface ActionBuilLink {
+export interface ActionBuildLink {
     link_index: number,
     second_build: number,
     coal_source: Coordinates | undefined
