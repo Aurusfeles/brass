@@ -198,6 +198,9 @@ export class Town {
         this.name = name;
         this.places = places;
     }
+    is_established(player_index: number): boolean {
+        return this.places.some(place => place.industry_tile !== undefined && place.industry_tile.player == player_index);
+    }
 }
 
 
@@ -234,7 +237,7 @@ export enum Era {
 
 export class GameMap {
     towns: Record<TownName, Town>;
-    canals: Canal[];
+    links: Link[];
 
     constructor() {
         this.towns = {
@@ -264,7 +267,7 @@ export class GameMap {
             [TownName.Wigan]: new Town("Wigan", [new ConstructionPlace([IndustryType.CoalMine]), new ConstructionPlace([IndustryType.CoalMine])]),
             [TownName.Yorkshire]: new Town("Yorkshire", []),
         };
-        this.canals = [
+        this.links = [
             { link: [TownName.Lancaster, TownName.Preston] },
             { link: [TownName.Preston, TownName.Fleetwood] },
             { link: [TownName.Preston, TownName.Wigan] },
@@ -274,7 +277,6 @@ export class GameMap {
             { link: [TownName.Blackburn, TownName.Burnley] },
             { link: [TownName.Burnley, TownName.Colne] },
             { link: [TownName.Colne, TownName.Yorkshire] },
-            { link: [TownName.Rochdale, TownName.Yorkshire] },
             { link: [TownName.Rochdale, TownName.Yorkshire] },
             { link: [TownName.Rochdale, TownName.Oldham] },
             { link: [TownName.Oldham, TownName.Manchester] },
@@ -289,7 +291,8 @@ export class GameMap {
             { link: [TownName.EllesmerePort, TownName.Northwich] },
             { link: [TownName.Liverpool, TownName.EllesmerePort] },
             { link: [TownName.WarringtonAndRuncorn, TownName.EllesmerePort] }
-        ]
+        ];
+
     }
 
     set_industry_tile(industry_coordinates: Coordinates, industry_tile: IndustryTile, coal_coordinates: Coordinates | "market" | "none", inron_coordinates: Coordinates | "market" | "none") {
@@ -327,7 +330,7 @@ export function make_action_build_industry(game: Game, player_index: number, act
         }
     }
 
-    /// A FAIRE: tester le raccordement à un port, et voir s'il faut vider des cubes sur le marcher
+    /// A FAIRE: tester le raccordement à un port, et voir s'il faut vider des cubes sur le marché
 
     game.map.towns[action.coordinates.town_name].places[action.coordinates.construction_place_index].industry_tile = industry;
 
@@ -397,7 +400,7 @@ export class Game {
 
 }
 
-export interface Canal {
+export interface Link {
     link: TownName[],
     player?: number,
 }
@@ -448,3 +451,48 @@ export function build_possibilities_for_location(location, player, game) {
 export function build_possibilities_for_industry(industry, player, game) {
 
 }*/
+
+export function town_list_has_port(town_list: TownName[]): boolean {
+
+}
+
+export function connected_town_list(game: Game, town_name: TownName, town_list: TownName[] | undefined): TownName[] {
+    if (town_list === undefined) {
+        town_list = [];
+    }
+    town_list.push(town_name);
+
+    for (const link of game.map.links) {
+        if (link.player !== undefined) {
+            if (!town_list.includes(link.link[0])) {
+                town_list.concat(connected_town_list(game, link.link[0], town_list));
+            }
+            if (!town_list.includes(link.link[1])) {
+                town_list.concat(connected_town_list(game, link.link[1], town_list));
+            }
+        }
+    }
+    return town_list;
+}
+
+export function authorized_town_list(game: Game, player_index: number): TownName[] {
+    let authorized_town_list = (Object.entries(game.map.towns) as Array<[TownName, Town]>).filter(([name, town]) => {
+        return town.is_established(player_index)
+    }).map(([name, town]) => { return name });
+
+    if (!authorized_town_list) {
+        return (Object.entries(game.map.towns) as Array<[TownName, Town]>).map(([name, town]) => { return name });
+    }
+
+    for (const link of game.map.links) {
+        if (link.player !== undefined && link.player == player_index) {
+            if (!authorized_town_list.includes(link.link[0])) {
+                authorized_town_list.push(link.link[0]);
+            }
+            if (!authorized_town_list.includes(link.link[1])) {
+                authorized_town_list.push(link.link[1]);
+            }
+        }
+    }
+    return accessible_town_list;
+}
