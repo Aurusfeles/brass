@@ -32,11 +32,14 @@ export class RessourceMarket {
         return 5;
     }
 
-    push() {
-        if (this.spot > 0) {
+    push(quantity: number) {
+        let transfered_cubes = 0;
+        let bonus = 0;
+        while (transfered_cubes < quantity && this.spot > 0) {
             this.spot = this.spot - 1;
-            return this.values[this.spot];
+            bonus += this.values[this.spot];
         }
+        return [transfered_cubes, bonus];
     }
 }
 
@@ -303,7 +306,14 @@ export class GameMap {
     }
 }
 
-export function make_action_build_industry(game: Game, player_index: number, action: ActionBuildIndustry): Game {
+export function make_action_build_link(game: Game, player_index: number, canal_index: number): Game {
+    game.map.links[canal_index].player = player_index;
+    game.players[player_index].money -= 3;
+    return game;
+}
+
+
+export function make_action_build_industry(game: Game, player_index: number, action: ActionBuildIndustry) {
     let player = game.players[player_index];
     let industry = player.industry_tile_stock.pop_industry_tile(action.industry);
     if (industry === undefined) {
@@ -330,14 +340,28 @@ export function make_action_build_industry(game: Game, player_index: number, act
         }
     }
 
-    /// A FAIRE: tester le raccordement à un port, et voir s'il faut vider des cubes sur le marché
+    let town_list = connected_town_list(game, action.coordinates.town_name, undefined);
+    let bonus = 0;
+    let cube_quantity = 0;
+    if (industry.cube_quantity !== undefined) {
+
+        if (industry.type == IndustryType.CoalMine && town_list_has_port(game, town_list)) {
+            [cube_quantity, bonus] = game.coal_market.push(industry.cube_quantity);
+            industry.cube_quantity -= cube_quantity;
+        }
+        else if (industry.type == IndustryType.Ironworks) {
+            [cube_quantity, bonus] = game.iron_market.push(industry.cube_quantity);
+            industry.cube_quantity -= cube_quantity;
+        }
+    }
 
     game.map.towns[action.coordinates.town_name].places[action.coordinates.construction_place_index].industry_tile = industry;
 
-    player.money -= total_cost;
+    player.money = player.money - total_cost + bonus;
     player.spent_money += total_cost;
-    return game;
+
 }
+
 
 export interface ActionBuildIndustry {
     industry: IndustryType,
@@ -452,9 +476,20 @@ export function build_possibilities_for_industry(industry, player, game) {
 
 }*/
 
-export function town_list_has_port(town_list: TownName[]): boolean {
+export function town_list_has_port(game: Game, town_list: TownName[]): boolean {
+    for (const town_name of town_list) {
 
+        for (const construction_place of game.map.towns[town_name].places) {
+            if (construction_place.industry_tile != undefined && construction_place.industry_tile.type == IndustryType.Port) {
+                return true;
+            }
+        }
+    }
+    return false;
 }
+
+
+
 
 export function connected_town_list(game: Game, town_name: TownName, town_list: TownName[] | undefined): TownName[] {
     if (town_list === undefined) {
@@ -494,5 +529,5 @@ export function authorized_town_list(game: Game, player_index: number): TownName
             }
         }
     }
-    return accessible_town_list;
+    return authorized_town_list;
 }

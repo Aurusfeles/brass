@@ -7,6 +7,12 @@
         :info="v"
         :name="k"
       />
+      <LinkPlace
+        v-for="(link, index) in info.links"
+        :key="index"
+        :info="link"
+        era="canal"
+      />
     </div>
   </div>
 </template>
