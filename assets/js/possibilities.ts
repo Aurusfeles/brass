@@ -6,7 +6,7 @@ export enum IndustryType {
     Shipyard = "shipyard",
 }
 
-export enum CubeType {
+export enum Resource {
     Iron = "iron",
     Coal = "coal"
 }
@@ -25,6 +25,7 @@ export class RessourceMarket {
     }
 
     pop() {
+        console.log("pop!");
         if (this.spot < 7) {
             this.spot = this.spot + 1;
             return this.values[this.spot - 1];
@@ -38,6 +39,7 @@ export class RessourceMarket {
         while (transfered_cubes < quantity && this.spot > 0) {
             this.spot = this.spot - 1;
             bonus += this.values[this.spot];
+            transfered_cubes += 1;
         }
         return [transfered_cubes, bonus];
     }
@@ -90,10 +92,10 @@ export class IndustryTile {
     needs_coal: boolean;
     needs_iron: boolean;
     cube_production?: number;
-    cube_type?: CubeType;
+    cube_type?: Resource;
     cube_quantity?: number;
 
-    constructor(type: IndustryType, player: number, level: number, cost: number, income: number, victory_points: number, needs_coal: boolean, needs_iron: boolean, cube_production?: number, cube_type?: CubeType) {
+    constructor(type: IndustryType, player: number, level: number, cost: number, income: number, victory_points: number, needs_coal: boolean, needs_iron: boolean, cube_production?: number, cube_type?: Resource) {
         this.type = type;
         this.player = player;
         this.level = level;
@@ -146,19 +148,19 @@ export class IndustryTileStock {
         this.cotton_mills.push(new IndustryTile(IndustryType.CottonMill, player, 3, 18, 2, 12, true, true));
 
         this.coal_mines = [];
-        this.coal_mines.push(new IndustryTile(IndustryType.CoalMine, player, 1, 5, 4, 1, false, false, 2, CubeType.Coal));
-        this.coal_mines.push(new IndustryTile(IndustryType.CoalMine, player, 2, 7, 7, 2, false, false, 3, CubeType.Coal));
-        this.coal_mines.push(new IndustryTile(IndustryType.CoalMine, player, 2, 7, 7, 2, false, false, 3, CubeType.Coal));
-        this.coal_mines.push(new IndustryTile(IndustryType.CoalMine, player, 3, 8, 6, 3, false, true, 4, CubeType.Coal));
-        this.coal_mines.push(new IndustryTile(IndustryType.CoalMine, player, 3, 8, 6, 3, false, true, 4, CubeType.Coal));
-        this.coal_mines.push(new IndustryTile(IndustryType.CoalMine, player, 4, 10, 5, 4, false, true, 5, CubeType.Coal));
-        this.coal_mines.push(new IndustryTile(IndustryType.CoalMine, player, 4, 10, 5, 4, false, true, 5, CubeType.Coal));
+        this.coal_mines.push(new IndustryTile(IndustryType.CoalMine, player, 1, 5, 4, 1, false, false, 2, Resource.Coal));
+        this.coal_mines.push(new IndustryTile(IndustryType.CoalMine, player, 2, 7, 7, 2, false, false, 3, Resource.Coal));
+        this.coal_mines.push(new IndustryTile(IndustryType.CoalMine, player, 2, 7, 7, 2, false, false, 3, Resource.Coal));
+        this.coal_mines.push(new IndustryTile(IndustryType.CoalMine, player, 3, 8, 6, 3, false, true, 4, Resource.Coal));
+        this.coal_mines.push(new IndustryTile(IndustryType.CoalMine, player, 3, 8, 6, 3, false, true, 4, Resource.Coal));
+        this.coal_mines.push(new IndustryTile(IndustryType.CoalMine, player, 4, 10, 5, 4, false, true, 5, Resource.Coal));
+        this.coal_mines.push(new IndustryTile(IndustryType.CoalMine, player, 4, 10, 5, 4, false, true, 5, Resource.Coal));
 
         this.ironworks = [];
-        this.ironworks.push(new IndustryTile(IndustryType.Ironworks, player, 1, 5, 3, 3, true, false, 4, CubeType.Iron));
-        this.ironworks.push(new IndustryTile(IndustryType.Ironworks, player, 2, 7, 3, 5, true, false, 4, CubeType.Iron));
-        this.ironworks.push(new IndustryTile(IndustryType.Ironworks, player, 3, 9, 2, 7, true, false, 5, CubeType.Iron));
-        this.ironworks.push(new IndustryTile(IndustryType.Ironworks, player, 4, 12, 1, 9, true, false, 6, CubeType.Iron));
+        this.ironworks.push(new IndustryTile(IndustryType.Ironworks, player, 1, 5, 3, 3, true, false, 4, Resource.Iron));
+        this.ironworks.push(new IndustryTile(IndustryType.Ironworks, player, 2, 7, 3, 5, true, false, 4, Resource.Iron));
+        this.ironworks.push(new IndustryTile(IndustryType.Ironworks, player, 3, 9, 2, 7, true, false, 5, Resource.Iron));
+        this.ironworks.push(new IndustryTile(IndustryType.Ironworks, player, 4, 12, 1, 9, true, false, 6, Resource.Iron));
 
         this.shipyards = [];
         this.shipyards.push(new IndustryTile(IndustryType.Shipyard, player, 0, 9999, 0, 0, false, false));
@@ -508,6 +510,39 @@ export function connected_town_list(game: Game, town_name: TownName, town_list: 
         }
     }
     return town_list;
+}
+
+export function make_action_development(game: Game, player_index: number, action: ActionDevelopment) {
+    console.log("action");
+    game.players[player_index].industry_tile_stock.pop_industry_tile(action.industry);
+    let cost = consume_resource(game, action.iron_source, Resource.Iron);
+    if (cost !== undefined) {
+        game.players[player_index].spent_money += cost;
+        game.players[player_index].money -= cost;
+    }
+
+}
+
+export function consume_resource(game: Game, coordinates: Coordinates | "market" | undefined, resource: Resource) {
+    console.log("consume");
+    if (coordinates === undefined) {
+        return 0;
+    }
+    else if (coordinates === "market") {
+        if (resource == Resource.Iron) {
+            return game.iron_market.pop();
+        }
+        else if (resource == Resource.Coal) {
+            return game.coal_market.pop();
+        }
+
+    }
+    else {
+        let industry = game.map.towns[coordinates.town_name].places[coordinates.construction_place_index].industry_tile;
+        if (industry !== undefined && industry.cube_quantity !== undefined && industry.cube_quantity > 1) {
+            industry.cube_quantity -= 1;
+        }
+    }
 }
 
 export function authorized_town_list(game: Game, player_index: number): TownName[] {
