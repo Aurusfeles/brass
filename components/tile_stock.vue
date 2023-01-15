@@ -17,22 +17,17 @@
 </template>
 
 <script setup lang="ts">
-import { useGameStore } from "~/stores/game_store";
-const { players } = useGameStore();
+import * as possibilities from "~/assets/js/possibilities";
 
 const props = defineProps({
-  player_index: {
+  industry_tile_stock: {
+    type: possibilities.IndustryTileStock,
+    required: true,
+  },
+  link_tile_stock: {
     type: Number,
     required: true,
   },
-});
-
-const industry_tile_stock = computed(() => {
-  return players[props.player_index].industry_tile_stock;
-});
-
-const link_tile_stock = computed(() => {
-  return players[props.player_index].link_tile_stock;
 });
 </script>
 
