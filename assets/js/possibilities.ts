@@ -11,9 +11,41 @@ export enum Resource {
     Coal = "coal"
 }
 
+
 export enum CardType {
     Location = "location",
     Industry = "industry"
+}
+
+export class IncomeTrack {
+    spot: number;
+    values: Array<number>;
+    constructor() {
+        this.spot = 10;
+        this.values = [-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 11, 12, 12, 12, 13, 13, 13, 14, 14, 14, 15, 15, 15, 16, 16, 16, 17, 17, 17, 18, 18, 18, 19, 19, 19, 20, 20, 20, 21, 21, 21, 21, 22, 22, 22, 22, 23, 23, 23, 23, 24, 24, 24, 24, 25, 25, 25, 25, 26, 26, 26, 26, 27, 27, 27, 27, 28, 28, 28, 28, 29, 29, 29, 29, 30, 30, 30];
+    }
+
+    move_forward(steps: number) {
+        this.spot += steps;
+        if (this.spot >= this.values.length) {
+            this.spot = this.values.length - 1;
+        }
+    }
+
+    get_income(): number {
+        return this.values[this.spot];
+    }
+
+    take_loan(loan_level: number) {
+        let value = this.values[this.spot];
+        while (loan_level > 0 && this.spot > 0) {
+            this.spot -= 1;
+            if (this.values[this.spot] != value) {
+                value = this.values[this.spot];
+                loan_level -= 1;
+            }
+        }
+    }
 }
 
 export class RessourceMarket {
@@ -215,7 +247,7 @@ export class Player {
     color: string;
     money: number;
     victory_points: number;
-    income_spot: number;
+    income_track: IncomeTrack;
     hand: Card[];
     industry_tile_stock: IndustryTileStock;
     link_tile_stock: number;
@@ -228,7 +260,7 @@ export class Player {
         this.money = 30;
         this.spent_money = 0;
         this.victory_points = 0;
-        this.income_spot = 10;
+        this.income_track = new IncomeTrack();
         this.hand = [];
         this.industry_tile_stock = new IndustryTileStock(id);
         this.link_tile_stock = 15;
@@ -299,13 +331,13 @@ export class GameMap {
         ];
 
     }
-
-    set_industry_tile(industry_coordinates: Coordinates, industry_tile: IndustryTile, coal_coordinates: Coordinates | "market" | "none", inron_coordinates: Coordinates | "market" | "none") {
-        if (coal_coordinates == "market") {
-            // trouver un chemin jusqu'à un port
-        }
-        this.towns[industry_coordinates.town_name].places[industry_coordinates.construction_place_index].set_industry_tile(industry_tile);
-    }
+    /*
+        set_industry_tile(industry_coordinates: Coordinates, industry_tile: IndustryTile, coal_coordinates: Coordinates | "market" | "none", inron_coordinates: Coordinates | "market" | "none") {
+            if (coal_coordinates == "market") {
+                // trouver un chemin jusqu'à un port
+            }
+            this.towns[industry_coordinates.town_name].places[industry_coordinates.construction_place_index].set_industry_tile(industry_tile);
+        }*/
 }
 
 export function make_action_build_link(game: Game, player_index: number, canal_index: number): Game {
@@ -491,7 +523,10 @@ export function town_list_has_port(game: Game, town_list: TownName[]): boolean {
 }
 
 
-
+export function make_action_loan(game: Game, player_index: number, action: ActionLoan) {
+    game.players[player_index].money += 10 * action.level;
+    game.players[player_index].income_track.take_loan(action.level);
+}
 
 export function connected_town_list(game: Game, town_name: TownName, town_list: TownName[] | undefined): TownName[] {
     if (town_list === undefined) {
