@@ -1,11 +1,16 @@
-/*import mongo from "~/assets/js/mongo";
+import mongo from "~/assets/js/mongo";
 
 
 export default defineEventHandler(async function (event) {
 
-    await mongo.connect();
+    // await mongo.connect();
+
+
+    console.log("api", getQuery(event));
+    return "ok"
+    /*
     await mongo.db('brass').collection("games").replaceOne({
-        _id: "mydoc"
+        _id: "94425631"
     },
         {
             map: {
@@ -60,5 +65,5 @@ export default defineEventHandler(async function (event) {
     return {
         api: "works"
     }
-
-})*/
+*/
+})
