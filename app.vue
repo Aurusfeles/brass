@@ -17,7 +17,7 @@ import { useGameStore } from "@/stores/game_store";
 const { map, coal_market, iron_market, players } = useGameStore();
 
 const test_clic = async () => {
-  await useFetch("/api/testapi", {
+  await useFetch("/api/new_game/", {
     query: { truc: "blabla", param2: "value2" },
   });
 };

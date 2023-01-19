@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@pinia/nuxt": "^0.4.6",
+    "hasha": "^5.2.2",
     "mongodb": "^4.11.0",
     "pinia": "^2.0.28",
     "typescript": "^4.9.4",
