@@ -430,6 +430,9 @@ export interface Coordinates {
 }
 
 export class Game {
+    name: string;
+    password: string;
+    password_protected: boolean;
     players: Player[];
     map: GameMap;
     coal_market: RessourceMarket;
@@ -440,7 +443,10 @@ export class Game {
     deck: number;
     played_cards: Card[];
 
-    constructor() {
+    constructor(name: string, password_protected: boolean, password: string) {
+        this.name = name;
+        this.password_protected = password_protected;
+        this.password = password;
         this.players = [];
         this.map = new GameMap();
         this.coal_market = new RessourceMarket();

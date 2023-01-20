@@ -26,13 +26,14 @@ async function make_brand_new_token() {
 export default defineEventHandler(async function (event) {
 
     const dbConnect = mongo.getDb();
+    const params = getQuery(event);
 
     dbConnect
         .collection("games")
         .replaceOne({
             _id: await make_brand_new_token()
         },
-            new possibilities.Game()
+            new possibilities.Game(params.name, params.password_protected, params.password)
             ,
             { upsert: true });
     return "ok"
